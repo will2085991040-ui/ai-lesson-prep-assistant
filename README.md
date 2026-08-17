@@ -1,12 +1,12 @@
-# AI备课助手（AI Lesson Prep Assistant）
+AI备课助手（AI Lesson Prep Assistant）
 
-> 面向全学科教师的 AI 备课全家桶：**微信小程序 + H5/App 跨端**，双端共用一套后端。
+> 面向全学科教师的 AI 备课全家桶：微信小程序 + H5/App 跨端，双端共用一套后端。
 > 从"生成教案"到"图文课件 + 放映 + 导出 PPTX + 说课稿 + 题库联动 + 开场视频"，一个仓库全搞定。
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-微信小程序%20%7C%20H5%20%7C%20Android-brightgreen.svg)]()
 
-## ✨ 核心功能
+ ✨ 核心功能
 
 | 功能 | 说明 |
 | --- | --- |
@@ -23,7 +23,7 @@
 | 💰 积分计费 + 兑换码充值 | 新用户送 200 积分；每次 AI 调用扣积分；个人主体用兑换码充值 |
 | 🗓️ 每日小提示 + 课表 + 知识库 + 提示词宝典 | 教师效率全家桶 |
 
-## 🏗️ 仓库结构
+🏗️ 仓库结构
 
 ```
 ├── miniprogram-app/          # 微信小程序版（原生 WXML/WXSS/JS + 微信云开发）
@@ -44,7 +44,7 @@
 └── README.md                 # 本文档
 ```
 
-## 🔧 技术架构
+🔧 技术架构
 
 ```
 ┌─────────────┐   ┌──────────────┐
@@ -69,7 +69,7 @@
 - **身份**：小程序用 openid；H5 用匿名 userId（云函数 `userId || OPENID` 兜底，两端数据互通）
 - **计费**：积分制（充值/消耗流水全记录），AI 调用前后余额校验
 
-## 🚀 快速开始
+🚀 快速开始
 
 ### 小程序版
 完整步骤见 [miniprogram-app/新手操作手册.md](miniprogram-app/新手操作手册.md)：
@@ -78,18 +78,22 @@
 3. 配置密钥：把根目录 `env.local.example.js` 复制到每个 AI 云函数目录，改名 `env.local.js` 并填入你的方舟 API Key 与接入点 ID
 4. 数据库 `redeem_codes` 加一条兑换码记录即可体验充值
 
-### H5 版
+ H5 版
 完整步骤见 [h5-app/部署教程.md](h5-app/部署教程.md) 与 [h5-app/H5国内部署教程.md](h5-app/H5国内部署教程.md)：
 1. HBuilderX 导入 `h5-app`
 2. 给 `h5gateway` 云函数开启 HTTP 触发，把地址填进 `h5-app/utils/config.js`
 3. 运行到浏览器 → 发行 H5 → 免费托管（Netlify/Gitee Pages）
 
-## ⚠️ 安全说明
+ ⚠️ 安全说明
 
 - 本仓库**不包含任何真实密钥**（`env.local.js` 已 gitignore）
 - 密钥模板见 `env.local.example.js`；正式部署建议用云开发控制台环境变量（优先级高于本地文件）
 - 云函数内置白名单（h5gateway 只能调用指定函数/集合）
 
-## 📄 License
+ 📄 License
 
 MIT
+
+ 💖 支持与赞助
+如果项目对你有帮助，可以请作者喝杯咖啡~
+ 微信赞赏
