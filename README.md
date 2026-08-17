@@ -97,4 +97,4 @@ MIT
  💖 支持与赞助
 如果项目对你有帮助，可以请作者喝杯咖啡~
  微信赞赏
-![url=https://imgchr.com/i/pmjKgTP][img]https://s41.ax1x.com/2026/08/17/pmjKgTP.png[/img][/url]
+!<a href="https://imgchr.com/i/pmjKgTP"><img src="https://s41.ax1x.com/2026/08/17/pmjKgTP.png" alt="pmjKgTP.png" border="0" /></a>
