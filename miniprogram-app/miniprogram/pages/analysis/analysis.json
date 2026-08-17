@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "学情诊断",
+  "usingComponents": {
+    "loading-ai": "/components/loading-ai/loading-ai",
+    "radar-chart": "/components/radar-chart/radar-chart"
+  }
+}

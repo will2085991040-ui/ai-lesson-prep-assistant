@@ -1,0 +1,11 @@
+{
+  "name": "export-pptx",
+  "version": "1.0.0",
+  "description": "AI备课助手-导出PPTX文件云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "pptxgenjs": "^3.12.0",
+    "jszip": "^3.10.1"
+  }
+}

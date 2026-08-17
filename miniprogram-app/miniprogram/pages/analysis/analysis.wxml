@@ -1,0 +1,92 @@
+<!-- pages/analysis/analysis.wxml - 学情诊断页面 -->
+<view class="page {{result ? 'has-fixed-bar' : ''}}">
+
+  <!-- 表单卡片 -->
+  <view class="card form-card">
+
+    <!-- 学科 -->
+    <picker mode="selector" range="{{subjects}}" value="{{indexes.subjectIndex}}" bindchange="onSubjectChange">
+      <view class="form-item">
+        <view class="form-label required">学科</view>
+        <view class="form-value {{form.subject ? '' : 'form-placeholder'}}">{{form.subject || '请选择学科'}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+
+    <!-- 年级 -->
+    <picker mode="selector" range="{{grades}}" value="{{indexes.gradeIndex}}" bindchange="onGradeChange">
+      <view class="form-item">
+        <view class="form-label required">年级</view>
+        <view class="form-value {{form.grade ? '' : 'form-placeholder'}}">{{form.grade || '请选择年级'}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+
+    <!-- 课题 -->
+    <view class="form-item">
+      <view class="form-label required">课题</view>
+      <input class="form-input" placeholder="如：一元二次方程单元测验" placeholder-class="form-placeholder" value="{{form.topic}}" data-field="topic" bindinput="onInput" />
+    </view>
+
+    <!-- 测验分 -->
+    <view class="form-item">
+      <view class="form-label required">测验分</view>
+      <input class="form-input" type="number" maxlength="3" placeholder="如：85" placeholder-class="form-placeholder" value="{{form.score}}" data-field="score" bindinput="onInput" />
+    </view>
+
+    <!-- 常见错误 -->
+    <view class="form-block">
+      <view class="form-label">常见错误</view>
+      <textarea class="form-textarea" placeholder="如：计算粗心、概念混淆、审题不清" placeholder-class="form-placeholder" value="{{form.errors}}" data-field="errors" bindinput="onInput" maxlength="200" />
+    </view>
+
+    <!-- 生成按钮 -->
+    <view class="btn btn-primary generate-btn" hover-class="btn-hover" bindtap="onGenerate">✨ 生成学情诊断</view>
+  </view>
+
+  <!-- 结果区 -->
+  <block wx:if="{{result}}">
+    <!-- 区块标题 + 右侧重新生成 -->
+    <view class="section-title result-title">
+      <text class="result-title-text">诊断结果</text>
+      <view class="regen-btn" hover-class="btn-hover" bindtap="onGenerate">🔄 重新生成</view>
+    </view>
+
+    <!-- 能力雷达图 -->
+    <view class="card">
+      <radar-chart dimensions="{{result.radar.dimensions}}" max="{{result.radar.max}}" />
+    </view>
+
+    <!-- 整体评述 -->
+    <view class="card">
+      <view class="card-title">整体评述</view>
+      <text class="content-text" user-select>{{result.overall}}</text>
+    </view>
+
+    <!-- 薄弱点 -->
+    <view class="card">
+      <view class="card-title">薄弱点</view>
+      <view class="weak-item" wx:for="{{result.weakPoints}}" wx:key="*this">
+        <view class="weak-index">{{index + 1}}</view>
+        <view class="weak-icon">⚠️</view>
+        <text class="weak-text">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 分层教学建议 -->
+    <view class="card">
+      <view class="card-title">分层教学建议</view>
+      <view class="sug-item" wx:for="{{result.suggestions}}" wx:key="level">
+        <view class="tag {{suggestionTags[index]}}">{{item.level}}</view>
+        <text class="content-text" user-select>{{item.content}}</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- AI 生成全屏 loading -->
+  <loading-ai show="{{generating}}" text="AI正在备课中..." subText="正在调用豆包大模型，预计 10-30 秒" />
+
+  <!-- 底部固定操作栏（有结果时显示） -->
+  <view class="fixed-bar" wx:if="{{result}}">
+    <view class="btn btn-plain bar-btn" hover-class="btn-hover" bindtap="onSave">💾 保存</view>
+    <view class="btn btn-primary bar-btn" hover-class="btn-hover" bindtap="onCopy">📋 复制全文</view>
+  </view>
+</view>

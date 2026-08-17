@@ -1,0 +1,26 @@
+<!-- pages/prompt-book/prompt-book.wxml - 提示词宝典 -->
+<view class="page">
+
+  <!-- 顶部说明 -->
+  <view class="form-tip book-tip">这些提示词可直接复制到 DeepSeek/豆包/即梦等任意 AI 工具使用</view>
+
+  <!-- 提示词列表 -->
+  <view class="card prompt-card" wx:for="{{prompts}}" wx:key="id">
+    <view class="prompt-head">
+      <view class="prompt-badge">{{index + 1}}</view>
+      <view class="prompt-main">
+        <view class="prompt-title">{{item.title}}</view>
+        <view class="prompt-desc">{{item.desc}}</view>
+      </view>
+    </view>
+
+    <view class="prompt-actions">
+      <view class="btn btn-ghost small-btn" hover-class="btn-hover" data-index="{{index}}" bindtap="onToggle">{{item.open ? '收起模板' : '查看模板'}}</view>
+      <view class="btn btn-ghost small-btn copy-btn" hover-class="btn-hover" data-index="{{index}}" bindtap="onCopy">📋 复制</view>
+    </view>
+
+    <!-- 展开的模板内容 -->
+    <view wx:if="{{item.open}}" class="prompt-template content-text">{{item.content}}</view>
+  </view>
+
+</view>

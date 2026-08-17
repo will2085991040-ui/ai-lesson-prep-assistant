@@ -1,0 +1,160 @@
+<!-- pages/detail/detail.wxml - 通用详情页 -->
+<view class="page {{loaded ? 'has-fixed-bar' : ''}}">
+
+  <block wx:if="{{loaded}}">
+    <!-- 顶部信息卡 -->
+    <view class="info-card">
+      <view class="info-top">
+        <view class="tag tag-blue">{{typeName}}</view>
+        <view class="fav-btn {{isFav ? 'tag-blue' : 'tag-gray'}}" bindtap="onToggleFav">{{isFav ? '★ 已收藏' : '☆ 收藏'}}</view>
+      </view>
+      <view class="info-title">{{viewTitle}}</view>
+      <view class="info-meta text-secondary">{{metaLine}}</view>
+    </view>
+
+    <!-- 教案：8 大折叠模块 -->
+    <block wx:if="{{type === 'lesson_plan'}}">
+      <collapsible-section wx:for="{{sections}}" wx:key="number" title="{{item.title}}" number="{{item.number}}" open="{{item.open}}">
+        <text class="content-text" user-select>{{item.content}}</text>
+      </collapsible-section>
+    </block>
+
+    <!-- 课件大纲：逐页卡片 -->
+    <block wx:if="{{type === 'ppt_outline'}}">
+      <!-- 课件封面图（若已生成） -->
+      <view class="card" wx:if="{{meta.coverFileId}}"><image class="cover-img" src="{{meta.coverFileId}}" mode="widthFix" /></view>
+      <view class="card slide-card" wx:for="{{slides}}" wx:key="idx">
+        <view class="slide-header">
+          <view class="slide-badge">{{index + 1}}</view>
+          <view class="slide-title">{{item.title}}</view>
+        </view>
+        <text class="content-text slide-content" user-select>{{item.content}}</text>
+        <view class="slide-tip">🖼 配图建议：{{item.visual}}</view>
+        <view class="slide-tip">✨ 动画建议：{{item.animation}}</view>
+      </view>
+    </block>
+
+    <!-- AI 完整课件：教学研究包 + 逐页卡片 + 讲解词 -->
+    <block wx:if="{{type === 'courseware'}}">
+      <!-- 教学研究包（旧记录无 pack 时不渲染） -->
+      <block wx:if="{{packSections.length}}">
+        <view class="section-title">📚 教学研究包</view>
+        <collapsible-section
+          wx:for="{{packSections}}"
+          wx:key="number"
+          title="{{item.title}}"
+          number="{{item.number}}"
+          open="{{item.open}}">
+          <text class="content-text" user-select>{{item.text}}</text>
+        </collapsible-section>
+      </block>
+
+      <!-- 全屏放映入口 -->
+      <view class="viewer-row">
+        <view class="btn btn-primary viewer-btn" hover-class="btn-hover" bindtap="onOpenViewer">▶ 全屏放映</view>
+      </view>
+
+      <!-- 逐页卡片 -->
+      <view class="card slide-card" wx:for="{{slides}}" wx:key="idx">
+        <view class="slide-header">
+          <view class="slide-badge">{{index + 1}}</view>
+          <view class="slide-title">{{item.title}}</view>
+        </view>
+        <image wx:if="{{item.imageFileID}}" class="slide-img" src="{{item.imageFileID}}" mode="widthFix" />
+        <text class="content-text slide-content" user-select>{{item.content}}</text>
+        <view class="slide-tip">🖼 配图建议：{{item.visual}}</view>
+        <view class="slide-tip">✨ 动画建议：{{item.animation}}</view>
+        <view class="notes-toggle" bindtap="onToggleNotes" data-idx="{{item.idx}}">{{item.showNotes ? '收起讲解词' : '查看讲解词'}}</view>
+        <view class="notes-box" wx:if="{{item.showNotes}}">
+          <text class="content-text" user-select>{{item.speakerNotes}}</text>
+        </view>
+      </view>
+
+      <!-- 全屏放映组件 -->
+      <slide-viewer show="{{showViewer}}" slides="{{slides}}" title="{{viewTitle}}" bind:close="onCloseViewer" />
+    </block>
+
+    <!-- 分层习题 -->
+    <block wx:if="{{type === 'exercises'}}">
+      <!-- 分层 tab -->
+      <view class="card">
+        <view class="ex-tabs">
+          <view
+            class="ex-tab {{activeKey === item.key ? 'ex-tab-active' : ''}}"
+            wx:for="{{exercisesTabs}}"
+            wx:key="key"
+            data-key="{{item.key}}"
+            bindtap="onExercisesTab"
+          >{{item.name}}</view>
+        </view>
+      </view>
+
+      <!-- 题目卡片 -->
+      <view class="card q-card" wx:for="{{data[activeKey]}}" wx:key="idx">
+        <view class="q-head">
+          <view class="tag {{activeTag}}">{{item.difficulty}}</view>
+          <view class="q-no">第{{index + 1}}题</view>
+        </view>
+        <text class="content-text q-content" user-select>{{item.content}}</text>
+        <!-- 选项（存在时逐行渲染） -->
+        <block wx:if="{{item.options.length}}">
+          <view class="q-option" wx:for="{{item.options}}" wx:for-item="opt" wx:for-index="optIndex" wx:key="*this">{{opt}}</view>
+        </block>
+        <!-- 答案解析切换 -->
+        <view class="q-answer-toggle" bindtap="onToggleAnswer" data-idx="{{index}}">{{item.showAnswer ? '收起解析' : '查看答案解析'}}</view>
+        <block wx:if="{{item.showAnswer}}">
+          <view class="q-answer">答案：{{item.answer}}</view>
+          <view class="q-answer">解析：{{item.analysis}}</view>
+        </block>
+      </view>
+    </block>
+
+    <!-- 学情诊断 -->
+    <block wx:if="{{type === 'analysis'}}">
+      <view class="card">
+        <radar-chart dimensions="{{data.radar.dimensions}}" max="{{data.radar.max}}" />
+      </view>
+      <view class="card">
+        <view class="card-title">整体评述</view>
+        <text class="content-text" user-select>{{data.overall}}</text>
+      </view>
+      <view class="card">
+        <view class="card-title">薄弱点</view>
+        <view class="weak-item" wx:for="{{data.weakPoints}}" wx:key="*this">
+          <view class="weak-icon">⚠️</view>
+          <text class="weak-text">{{item}}</text>
+        </view>
+      </view>
+      <view class="card">
+        <view class="card-title">分层教学建议</view>
+        <view class="sug-item" wx:for="{{data.suggestions}}" wx:key="level">
+          <view class="tag {{suggestionTags[index]}}">{{item.level}}</view>
+          <text class="content-text" user-select>{{item.content}}</text>
+        </view>
+      </view>
+    </block>
+  </block>
+
+  <!-- 海报画布（定位在屏幕外，不能 display:none） -->
+  <canvas type="2d" id="posterCanvas" class="poster-canvas"></canvas>
+
+  <!-- 底部固定操作栏 -->
+  <view class="fixed-bar detail-bar" wx:if="{{loaded}}">
+    <view class="bar-row">
+      <view class="btn btn-ghost bar-btn" hover-class="btn-hover" bindtap="onRegenerate">🔄 重新生成</view>
+      <view class="btn btn-plain bar-btn" hover-class="btn-hover" bindtap="onCopy">📋 复制全文</view>
+    </view>
+    <view class="btn btn-primary poster-btn-full" hover-class="btn-hover" bindtap="onMakePoster">🎨 生成分享海报</view>
+  </view>
+
+  <!-- 海报弹层 -->
+  <view class="poster-mask" wx:if="{{showPoster}}" catchtap="onClosePoster">
+    <view class="poster-dialog" catchtap="noop">
+      <image class="poster-img" src="{{posterPath}}" mode="widthFix" style="width:600rpx" />
+      <view class="poster-actions">
+        <view class="btn btn-primary bar-btn" hover-class="btn-hover" bindtap="onSavePoster">保存到相册</view>
+        <view class="btn btn-plain bar-btn" hover-class="btn-hover" bindtap="onClosePoster">关闭</view>
+      </view>
+    </view>
+  </view>
+</view>

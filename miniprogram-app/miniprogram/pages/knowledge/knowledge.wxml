@@ -1,0 +1,89 @@
+<!-- pages/knowledge/knowledge.wxml - 个人知识库 -->
+<view class="page">
+
+  <!-- 顶部：搜索框 + 新建按钮 -->
+  <view class="search-row">
+    <view class="search-bar">
+      <view class="search-icon">🔍</view>
+      <input class="search-input" placeholder="搜索标题/内容/分类" placeholder-class="form-placeholder" value="{{keyword}}" bindinput="onKeywordInput" />
+    </view>
+    <view class="btn btn-ghost add-btn" hover-class="btn-hover" bindtap="onToggleAdd">{{showAdd ? '收起' : '+ 新建'}}</view>
+  </view>
+
+  <!-- 分类筛选 chips -->
+  <view class="chip-row">
+    <view
+      wx:for="{{categories}}"
+      wx:key="*this"
+      class="chip {{activeCat === item ? 'chip-active' : ''}}"
+      data-index="{{index}}"
+      bindtap="onCatTap">{{item}}</view>
+  </view>
+
+  <!-- 添加表单 -->
+  <view class="card" wx:if="{{showAdd}}">
+    <view class="card-title">📝 新建知识</view>
+    <view class="form-item">
+      <view class="form-label required">标题</view>
+      <input class="form-input" placeholder="如：分数加减法 教研笔记" placeholder-class="form-placeholder" value="{{form.title}}" data-field="title" bindinput="onFormInput" />
+    </view>
+    <picker mode="selector" range="{{catOptions}}" value="{{catIndex}}" bindchange="onCatChange">
+      <view class="form-item">
+        <view class="form-label">分类</view>
+        <view class="form-value">{{catOptions[catIndex]}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+    <view class="form-item">
+      <view class="form-label required">内容</view>
+      <textarea class="form-textarea add-textarea" placeholder="教研笔记、好用的提示词、学科资料都可以存进来" placeholder-class="form-placeholder" value="{{form.content}}" data-field="content" bindinput="onFormInput" />
+    </view>
+    <view class="btn btn-primary" hover-class="btn-hover" bindtap="onSave">保存到知识库</view>
+  </view>
+
+  <!-- 知识列表 -->
+  <view
+    wx:for="{{list}}"
+    wx:key="id"
+    class="card list-card"
+    data-index="{{index}}"
+    bindtap="onItemTap">
+    <view class="item-head">
+      <text class="tag {{item.catTag}}">{{item.category}}</text>
+      <view class="item-title ellipsis">{{item.title}}</view>
+    </view>
+    <view class="item-content content-text ellipsis-2">{{item.content}}</view>
+    <view class="item-time text-secondary">{{item.time}}</view>
+  </view>
+
+  <!-- 空态：筛选无结果 -->
+  <view wx:if="{{!list.length && (keyword || activeCat !== '全部')}}" class="empty">
+    <view class="empty-icon">🔍</view>
+    <text>没有找到相关内容</text>
+  </view>
+
+  <!-- 空态：知识库为空 -->
+  <view wx:elif="{{!list.length}}" class="empty">
+    <view class="empty-icon">📚</view>
+    <text>知识库还是空的，把教研笔记、好用的提示词都存进来吧</text>
+  </view>
+
+  <!-- 详情弹层（全屏遮罩 + 白面板） -->
+  <view wx:if="{{detail}}" class="mask" catchtap="onCloseDetail">
+    <view class="detail-panel" catchtap="noop">
+      <view class="detail-head">
+        <text class="tag {{detail.catTag}}">{{detail.category}}</text>
+        <view class="detail-title">{{detail.title}}</view>
+        <view class="detail-time text-secondary">{{detail.time}}</view>
+      </view>
+      <scroll-view scroll-y class="detail-scroll">
+        <view class="detail-content content-text">{{detail.content}}</view>
+      </scroll-view>
+      <view class="detail-actions">
+        <view class="btn btn-primary bar-btn" hover-class="btn-hover" catchtap="onCopyDetail">📋 复制</view>
+        <view class="btn btn-danger bar-btn" hover-class="btn-hover" catchtap="onDeleteDetail">🗑 删除</view>
+        <view class="btn btn-plain bar-btn" hover-class="btn-hover" catchtap="onCloseDetail">关闭</view>
+      </view>
+    </view>
+  </view>
+
+</view>

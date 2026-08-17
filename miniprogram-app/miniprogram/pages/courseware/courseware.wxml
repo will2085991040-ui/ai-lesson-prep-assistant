@@ -1,0 +1,235 @@
+<!-- pages/courseware/courseware.wxml - AI 课件 -->
+<view class="page {{slides.length ? 'has-fixed-bar' : ''}}">
+
+  <!-- 表单卡片 -->
+  <view class="card">
+    <!-- 学科 -->
+    <picker mode="selector" range="{{subjects}}" value="{{indexes.subjectIndex}}" bindchange="onSubjectChange">
+      <view class="form-item">
+        <view class="form-label required">学科</view>
+        <view class="form-value {{form.subject ? '' : 'form-placeholder'}}">{{form.subject || '请选择学科'}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+
+    <!-- 年级 -->
+    <picker mode="selector" range="{{grades}}" value="{{indexes.gradeIndex}}" bindchange="onGradeChange">
+      <view class="form-item">
+        <view class="form-label required">年级</view>
+        <view class="form-value {{form.grade ? '' : 'form-placeholder'}}">{{form.grade || '请选择年级'}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+
+    <!-- 教材（可选，按学科/学段联动过滤） -->
+    <picker mode="selector" range="{{textbookNames}}" value="{{indexes.textbookIndex}}" bindchange="onTextbookChange">
+      <view class="form-item">
+        <view class="form-label">教材</view>
+        <view class="form-value {{form.textbook ? '' : 'form-placeholder'}}">{{form.textbook || '请选择教材（可选）'}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+
+    <!-- 课题 -->
+    <view class="form-item">
+      <view class="form-label required">课题</view>
+      <input class="form-input" placeholder="请输入课题，如：荷塘月色" placeholder-class="form-placeholder" value="{{form.topic}}" bindinput="onTopicInput" />
+    </view>
+
+    <!-- 页数 slider -->
+    <view class="form-item form-item-column">
+      <view class="form-label">页数</view>
+      <view class="slider-row">
+        <slider class="slider" min="10" max="50" step="1" value="{{form.pages}}" activeColor="#1677FF" block-size="24" bindchange="onPagesChange" show-value />
+        <text class="pages-num">共 {{form.pages}} 页</text>
+      </view>
+    </view>
+
+    <!-- 教学风格 -->
+    <picker mode="selector" range="{{styles}}" value="{{indexes.styleIndex}}" bindchange="onStyleChange">
+      <view class="form-item">
+        <view class="form-label">风格</view>
+        <view class="form-value">{{form.style}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+
+    <!-- 视觉风格（决定配图画风与导出配色） -->
+    <picker mode="selector" range="{{visualStyles}}" value="{{indexes.visualStyleIndex}}" bindchange="onVisualStyleChange">
+      <view class="form-item">
+        <view class="form-label">视觉风格</view>
+        <view class="form-value">{{form.visualStyle}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+
+    <!-- 学生水平假设 -->
+    <picker mode="selector" range="{{studentLevels}}" value="{{indexes.studentLevelIndex}}" bindchange="onStudentLevelChange">
+      <view class="form-item">
+        <view class="form-label">学生水平</view>
+        <view class="form-value">{{form.studentLevel}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+
+    <!-- 课件模板 chips -->
+    <view class="form-item form-item-column">
+      <view class="form-label">课件模板</view>
+      <view class="chip-row">
+        <view
+          wx:for="{{templates}}"
+          wx:key="*this"
+          class="chip {{form.template === item ? 'chip-active' : ''}}"
+          data-template="{{item}}"
+          bindtap="onTemplateTap">{{item}}</view>
+      </view>
+    </view>
+
+    <!-- 老师补充要求 -->
+    <view class="form-item form-item-column">
+      <view class="form-label">补充要求</view>
+      <textarea
+        class="form-textarea courseware-textarea"
+        placeholder="如：重点讲例题2，第10页后加入小组讨论环节，最后加中考真题练习…"
+        placeholder-class="form-placeholder"
+        value="{{form.requirements}}"
+        bindinput="onRequirementsInput"
+        maxlength="500" />
+    </view>
+  </view>
+
+  <!-- 生成按钮 -->
+  <view class="card">
+    <view class="btn btn-primary" hover-class="btn-hover" bindtap="onGenerate">✨ 生成完整课件</view>
+  </view>
+
+  <!-- 结果区 -->
+  <block wx:if="{{slides.length}}">
+    <!-- ① 教学研究包：5 大折叠模块 -->
+    <view class="section-title">📚 教学研究包</view>
+    <collapsible-section
+      wx:for="{{packSections}}"
+      wx:key="number"
+      title="{{item.title}}"
+      number="{{item.number}}"
+      open="{{item.open}}">
+      <text class="content-text" user-select>{{item.text}}</text>
+    </collapsible-section>
+
+    <!-- ② 课件页面：标题 + 操作行 -->
+    <view class="section-title">📑 课件页面（{{slides.length}} 页）</view>
+    <view class="ops-row">
+      <view class="btn btn-ghost ops-btn" hover-class="btn-hover" bindtap="onGenAllImages">{{imgBusy ? '🖼 生成中...' : '🖼 一键生成全部配图'}}</view>
+      <view class="btn btn-primary ops-btn" hover-class="btn-hover" bindtap="onPresent">▶ 全屏放映</view>
+      <view class="btn btn-plain ops-btn" hover-class="btn-hover" bindtap="onExport">📥 导出PPTX</view>
+      <view class="btn btn-ghost ops-btn" hover-class="btn-hover" bindtap="onGenLecture">{{lectureGen ? '🎤 生成中...' : '🎤 说课稿'}}</view>
+      <view class="btn btn-ghost ops-btn" hover-class="btn-hover" bindtap="onGenCloze">{{clozeGen ? '✍️ 生成中...' : '✍️ 随堂练习'}}</view>
+      <view class="btn btn-ghost ops-btn" hover-class="btn-hover" bindtap="onGenVideo">{{videoGen ? '🎬 生成中...' : '🎬 开场视频'}}</view>
+    </view>
+    <view class="ops-tip text-secondary">配图 25 积分/张，导出 20 积分，说课稿/随堂练习各 15 积分，开场视频 120 积分</view>
+
+    <!-- ③ 逐页卡片 -->
+    <view class="card">
+      <view wx:for="{{slides}}" wx:key="idx" class="slide-item">
+        <view class="slide-badge">{{index + 1}}</view>
+        <view class="slide-body">
+          <view class="slide-title">{{item.title}}</view>
+          <!-- 已生成配图 -->
+          <image wx:if="{{item.imageFileID}}" class="slide-img" src="{{item.imageFileID}}" mode="widthFix" />
+          <text class="content-text" user-select>{{item.content}}</text>
+          <view class="slide-tip text-secondary">🖼 配图建议：{{item.visual}}</view>
+          <view class="slide-tip text-secondary">✨ 动画建议：{{item.animation}}</view>
+
+          <!-- 讲解词折叠 -->
+          <view class="notes-toggle" data-idx="{{item.idx}}" bindtap="onToggleNotes">{{item.showNotes ? '收起讲解词' : '查看讲解词'}}</view>
+          <view wx:if="{{item.showNotes}}" class="notes-box">
+            <text class="content-text" user-select>{{item.speakerNotes}}</text>
+          </view>
+
+          <!-- 单页配图按钮（无嵌套三元，按状态拆三个节点） -->
+          <view wx:if="{{item.imgBusy}}" class="btn btn-ghost img-btn" hover-class="btn-hover" data-idx="{{item.idx}}" bindtap="onGenSlideImage">生成中...</view>
+          <view wx:elif="{{item.imageFileID}}" class="btn btn-ghost img-btn" hover-class="btn-hover" data-idx="{{item.idx}}" bindtap="onGenSlideImage">🖼 重新配图</view>
+          <view wx:else class="btn btn-ghost img-btn" hover-class="btn-hover" data-idx="{{item.idx}}" bindtap="onGenSlideImage">🖼 生成配图</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 全屏放映组件 -->
+  <slide-viewer show="{{showViewer}}" slides="{{slides}}" title="{{form.topic}}" bind:close="onCloseViewer" />
+
+  <!-- 底部固定操作栏 -->
+  <view wx:if="{{slides.length}}" class="fixed-bar">
+    <view class="btn btn-plain bar-btn" hover-class="btn-hover" bindtap="onSave">💾 保存</view>
+    <view class="btn btn-ghost bar-btn" hover-class="btn-hover" bindtap="onCopy">📋 复制全文</view>
+    <view class="btn btn-primary bar-btn" hover-class="btn-hover" bindtap="onSaveKnowledge">💡 存入知识库</view>
+  </view>
+
+  <!-- 说课稿弹层（全屏遮罩 + 白色面板滚动） -->
+  <view wx:if="{{lectureVisible}}" class="modal-mask" catchtap="onCloseLecture" catchtouchmove="noop">
+    <view class="modal-panel" catchtap="noop">
+      <view class="modal-head">🎤 说课稿</view>
+      <scroll-view class="modal-body" scroll-y>
+        <text class="content-text" user-select>{{lectureContent}}</text>
+      </scroll-view>
+      <view class="modal-foot">
+        <view class="btn btn-primary bar-btn" hover-class="btn-hover" bindtap="onCopyLecture">📋 复制</view>
+        <view class="btn btn-ghost bar-btn" hover-class="btn-hover" bindtap="onSaveLecture">💡 存入知识库</view>
+        <view class="btn btn-plain bar-btn" hover-class="btn-hover" bindtap="onCloseLecture">关闭</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 随堂练习（挖空）弹层 -->
+  <view wx:if="{{clozeVisible}}" class="modal-mask" catchtap="onCloseCloze" catchtouchmove="noop">
+    <view class="modal-panel" catchtap="noop">
+      <view class="modal-head">✍️ 随堂练习（挖空）</view>
+      <scroll-view class="modal-body" scroll-y>
+        <view wx:for="{{clozeItems}}" wx:key="idx" class="cloze-item">
+          <view class="cloze-head">
+            <view class="cloze-no">{{index + 1}}</view>
+            <text class="content-text cloze-content" user-select>{{item.content}}</text>
+          </view>
+          <!-- 选择题：选项逐行展示 -->
+          <view wx:if="{{item.type === 'choice'}}" class="cloze-options">
+            <text class="cloze-option" wx:for="{{item.options}}" wx:for-item="opt" wx:key="*this">{{opt}}</text>
+          </view>
+          <view class="cloze-toggle" data-idx="{{index}}" bindtap="onToggleClozeAnswer">{{item.showAnswer ? '收起' : '看答案'}}</view>
+          <!-- 挖空题浅绿答案块；选择题浅蓝答案+解析块 -->
+          <view wx:if="{{item.showAnswer}}" class="{{item.type === 'choice' ? 'analysis-box' : 'answer-box'}}">
+            <text class="cloze-line">答案：{{item.answer}}</text>
+            <text wx:if="{{item.type === 'choice' && item.analysis}}" class="cloze-line">解析：{{item.analysis}}</text>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="modal-foot">
+        <view class="btn btn-primary bar-btn" hover-class="btn-hover" bindtap="onCopyCloze">📋 复制全部</view>
+        <view class="btn btn-plain bar-btn" hover-class="btn-hover" bindtap="onCloseCloze">关闭</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 开场视频弹层 -->
+  <view wx:if="{{videoVisible}}" class="modal-mask" catchtap="onCloseVideo" catchtouchmove="noop">
+    <view class="modal-panel" catchtap="noop">
+      <view class="modal-head">🎬 课堂开场视频</view>
+      <view class="modal-body">
+        <video class="video-player" src="{{videoFileID}}" controls autoplay></video>
+        <view class="ops-tip text-secondary">视频已保存到本课件，导出备课时可在放映前播放</view>
+      </view>
+      <view class="modal-foot">
+        <view class="btn btn-plain" hover-class="btn-hover" bindtap="onCloseVideo">关闭</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI 生成全屏 loading -->
+  <loading-ai show="{{generating}}" text="AI正在生成课件..." subText="正在按 6 步教研流程备课，50 页约需 1-2 分钟" />
+
+  <!-- 开场视频生成 loading -->
+  <loading-ai show="{{videoGen}}" text="AI正在生成开场视频..." subText="视频生成约需 1-3 分钟，完成后自动弹出" />
+
+  <!-- 导出 PPTX loading -->
+  <loading-ai show="{{exporting}}" text="正在导出PPTX..." subText="正在生成可编辑的 PPT 文件，请稍候" />
+
+  <!-- 说课稿生成 loading -->
+  <loading-ai show="{{lectureGen}}" text="AI正在撰写说课稿..." />
+
+  <!-- 随堂练习生成 loading -->
+  <loading-ai show="{{clozeGen}}" text="AI正在出随堂练习..." />
+
+</view>

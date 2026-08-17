@@ -1,0 +1,9 @@
+{
+  "name": "h5gateway",
+  "version": "1.0.0",
+  "description": "AI备课助手-H5网页版网关云函数（HTTP 触发器，转发调用云函数并注入匿名 userId）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

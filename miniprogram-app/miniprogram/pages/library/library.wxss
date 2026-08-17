@@ -1,0 +1,127 @@
+/* pages/library/library.wxss - 备课库页面样式 */
+
+/* 顶部搜索框 */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin: 24rpx 24rpx 8rpx;
+  padding: 0 24rpx;
+  height: 76rpx;
+  background: #FFFFFF;
+  border-radius: 38rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+}
+.search-icon {
+  margin-right: 12rpx;
+  font-size: 28rpx;
+}
+.search-input {
+  flex: 1;
+  height: 76rpx;
+  font-size: 28rpx;
+}
+
+/* 类型 Tab */
+.tabs {
+  display: flex;
+  margin: 16rpx 24rpx 24rpx;
+  padding: 8rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+}
+.tab {
+  flex: 1;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #4E5969;
+  border-radius: 12rpx;
+}
+.tab-active {
+  background: linear-gradient(135deg, #1677FF, #3D8EFF);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+/* 列表容器 */
+.list {
+  padding-bottom: 20rpx;
+}
+
+/* 滑动删除外层容器 */
+.record {
+  position: relative;
+  overflow: hidden;
+  margin: 0 24rpx 20rpx;
+  border-radius: 16rpx;
+}
+/* 删除按钮（在主体之下） */
+.delete-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 140rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F53F3F;
+  color: #FFFFFF;
+  font-size: 28rpx;
+  z-index: 1;
+}
+/* 记录主体 */
+.record-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: 26rpx 24rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+  transform: translateX(0);
+  transition: transform 0.25s;
+}
+.record-open {
+  transform: translateX(-140rpx);
+}
+
+/* 图标 */
+.record-emoji {
+  width: 88rpx;
+  height: 88rpx;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+  border-radius: 16rpx;
+  background: #F7F8FA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+}
+
+/* 中间信息 */
+.record-main {
+  flex: 1;
+  min-width: 0;
+}
+.record-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1F2329;
+}
+.record-meta {
+  margin-top: 6rpx;
+}
+.record-time {
+  margin-top: 2rpx;
+}
+
+/* 右侧类型标签 */
+.record-type {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}

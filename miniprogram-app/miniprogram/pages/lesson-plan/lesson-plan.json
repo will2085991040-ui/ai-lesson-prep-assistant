@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "智能备课",
+  "usingComponents": {
+    "loading-ai": "../../components/loading-ai/loading-ai",
+    "collapsible-section": "../../components/collapsible-section/collapsible-section"
+  }
+}

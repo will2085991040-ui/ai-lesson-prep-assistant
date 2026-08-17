@@ -1,0 +1,28 @@
+/* pages/lesson-plan/lesson-plan.wxss - 智能备课样式 */
+.page {
+  padding-bottom: 40rpx;
+}
+
+/* 学情：label 与 textarea 上下排列 */
+.form-item-column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ==================== 结果头部 ==================== */
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 36rpx 24rpx 20rpx;
+}
+.result-title {
+  margin: 0;
+}
+.regen-btn {
+  height: 56rpx;
+  padding: 0 24rpx;
+  border-radius: 28rpx;
+  font-size: 24rpx;
+  flex-shrink: 0;
+}

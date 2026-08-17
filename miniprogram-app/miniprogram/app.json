@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/lesson-plan/lesson-plan",
+    "pages/ppt-outline/ppt-outline",
+    "pages/exercises/exercises",
+    "pages/analysis/analysis",
+    "pages/library/library",
+    "pages/detail/detail",
+    "pages/recharge/recharge",
+    "pages/courseware/courseware",
+    "pages/words/words",
+    "pages/mistakes/mistakes",
+    "pages/knowledge/knowledge",
+    "pages/prompt-book/prompt-book",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#1677FF",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "AI备课助手",
+    "backgroundColor": "#F5F7FA",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#86909C",
+    "selectedColor": "#1677FF",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/library/library",
+        "text": "备课库",
+        "iconPath": "images/library.png",
+        "selectedIconPath": "images/library-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "cloud": true,
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

@@ -1,0 +1,13 @@
+<!-- radar-chart.wxml - 原生 Canvas 雷达图组件模板 -->
+<view class="radar-wrap">
+  <!-- 雷达图画布 -->
+  <canvas type="2d" id="radarCanvas" class="radar-canvas"></canvas>
+  <!-- 图例列表：维度名 + 分值 -->
+  <view class="legend">
+    <view class="legend-item" wx:for="{{dimensions}}" wx:key="name">
+      <view class="legend-dot"></view>
+      <view class="legend-name">{{item.name}}</view>
+      <view class="legend-score">{{item.score}}分</view>
+    </view>
+  </view>
+</view>

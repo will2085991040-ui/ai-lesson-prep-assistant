@@ -1,0 +1,113 @@
+<!-- pages/index/index.wxml - 首页 -->
+<view class="page">
+
+  <!-- 顶部渐变蓝色头部卡片 -->
+  <view class="hero">
+    <view class="hero-greeting">{{greeting}}</view>
+    <view class="hero-sub">今天也要备出好课哦～</view>
+    <view class="hero-date">{{dateStr}}</view>
+  </view>
+
+  <!-- 每日备课小提示 -->
+  <view class="tip-card">
+    <view class="tip-head">
+      <text class="tip-icon">💡</text>
+      <text class="tip-label">每日备课小提示</text>
+    </view>
+    <text class="tip-text">{{dailyTip}}</text>
+  </view>
+
+  <!-- 今日课表 -->
+  <view class="schedule-card">
+    <view class="schedule-head">
+      <text class="schedule-icon">📅</text>
+      <text class="schedule-label">今日课表</text>
+    </view>
+
+    <!-- 空态 -->
+    <view wx:if="{{isEmpty}}" class="schedule-empty">
+      <text class="schedule-empty-text">还没有今天的课表</text>
+      <text class="schedule-link" bindtap="goSchedule">去设置</text>
+    </view>
+
+    <!-- 课节列表 -->
+    <view wx:else class="slot-list">
+      <view wx:for="{{todaySlots}}" wx:key="period" class="slot-item">
+        <text class="slot-period">第{{item.period}}节</text>
+        <text class="slot-subject">{{item.subject}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷入口 3 列网格（9 个） -->
+  <view class="quick-grid">
+    <view
+      wx:for="{{quickEntries}}"
+      wx:key="url"
+      class="quick-item"
+      hover-class="btn-hover"
+      data-url="{{item.url}}"
+      bindtap="onQuickTap">
+      <view class="quick-icon">{{item.emoji}}</view>
+      <view class="quick-name">{{item.name}}</view>
+      <view class="quick-desc">{{item.desc}}</view>
+    </view>
+  </view>
+
+  <!-- 热门课题推荐 -->
+  <view class="section-title">热门课题推荐</view>
+  <view class="card">
+    <!-- 学科切换 chips -->
+    <view class="chip-row">
+      <view
+        wx:for="{{hotSubjects}}"
+        wx:key="*this"
+        class="chip {{subjectIndex === index ? 'chip-active' : ''}}"
+        data-index="{{index}}"
+        bindtap="onSubjectChange">{{item}}</view>
+    </view>
+
+    <!-- 加载中 -->
+    <view wx:if="{{topicLoading}}" class="topic-loading">加载中...</view>
+
+    <block wx:else>
+      <!-- 空态 -->
+      <view wx:if="{{topics.length === 0}}" class="topic-empty">暂无推荐，下拉刷新试试</view>
+
+      <!-- 课题列表 -->
+      <view wx:else>
+        <view wx:for="{{topics}}" wx:key="title" class="topic-item" data-index="{{index}}" bindtap="onTopicTap">
+          <view class="topic-title">🔥 {{item.title}}</view>
+          <view class="topic-reason text-secondary">{{item.reason}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 最近备课 -->
+  <view class="section-title">最近备课</view>
+  <view class="card">
+    <!-- 空态 -->
+    <view wx:if="{{history.length === 0}}" class="empty">
+      <view class="empty-icon">📄</view>
+      <view>还没有备课记录，快去生成第一份教案吧</view>
+    </view>
+
+    <block wx:else>
+      <!-- 备课记录列表 -->
+      <view wx:for="{{history}}" wx:key="id" class="history-item" data-index="{{index}}" bindtap="onHistoryTap">
+        <view class="history-emoji">{{item.emoji}}</view>
+        <view class="history-body">
+          <view class="history-title ellipsis">{{item.title}}</view>
+          <view class="history-meta">
+            <text class="tag tag-blue">{{item.typeName}}</text>
+            <text class="history-time">{{item.timeStr}}</text>
+          </view>
+        </view>
+      </view>
+      <!-- 查看全部 -->
+      <view class="history-all" bindtap="goLibrary">查看全部</view>
+    </block>
+  </view>
+
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "分层习题",
+  "usingComponents": {
+    "loading-ai": "../../components/loading-ai/loading-ai"
+  }
+}

@@ -1,0 +1,110 @@
+<!-- pages/exercises/exercises.wxml - 分层习题 -->
+<view class="page {{result ? 'has-fixed-bar' : ''}}">
+
+  <!-- 表单卡片 -->
+  <view class="card">
+    <!-- 学科 -->
+    <picker mode="selector" range="{{subjects}}" value="{{indexes.subjectIndex}}" bindchange="onSubjectChange">
+      <view class="form-item">
+        <view class="form-label required">学科</view>
+        <view class="form-value {{form.subject ? '' : 'form-placeholder'}}">{{form.subject || '请选择学科'}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+
+    <!-- 年级 -->
+    <picker mode="selector" range="{{grades}}" value="{{indexes.gradeIndex}}" bindchange="onGradeChange">
+      <view class="form-item">
+        <view class="form-label required">年级</view>
+        <view class="form-value {{form.grade ? '' : 'form-placeholder'}}">{{form.grade || '请选择年级'}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+
+    <!-- 知识点 -->
+    <view class="form-item">
+      <view class="form-label required">知识点</view>
+      <input class="form-input" placeholder="如：一元二次方程" placeholder-class="form-placeholder" value="{{form.knowledge}}" bindinput="onKnowledgeInput" />
+    </view>
+
+    <!-- 题型多选 -->
+    <view class="form-item form-item-column">
+      <view class="form-label">题型</view>
+      <view class="chip-row">
+        <view
+          wx:for="{{typeChips}}"
+          wx:key="name"
+          class="chip {{item.active ? 'chip-active' : ''}}"
+          data-name="{{item.name}}"
+          bindtap="onTypeToggle">{{item.name}}</view>
+      </view>
+      <view class="form-tip">可多选，不选则默认不限</view>
+    </view>
+  </view>
+
+  <!-- 生成按钮 -->
+  <view class="card">
+    <view class="btn btn-primary" hover-class="btn-hover" bindtap="onGenerate">✨ 生成分层习题</view>
+  </view>
+
+  <!-- 结果区 -->
+  <block wx:if="{{result}}">
+    <view class="section-title">分层习题</view>
+
+    <!-- 三层 tab 条 -->
+    <view class="card tab-bar">
+      <view
+        wx:for="{{tabs}}"
+        wx:key="key"
+        class="tab {{activeKey === item.key ? 'tab-active' : ''}}"
+        data-key="{{item.key}}"
+        bindtap="onTabTap">
+        <text class="tab-name">{{item.name}}</text>
+        <text class="tab-count">{{item.count}}</text>
+      </view>
+    </view>
+
+    <!-- 题目列表 -->
+    <view class="card">
+      <!-- 空态 -->
+      <view wx:if="{{currentList.length === 0}}" class="empty">
+        <view class="empty-icon">📝</view>
+        <view>本层暂无题目</view>
+      </view>
+
+      <block wx:else>
+        <view wx:for="{{currentList}}" wx:key="qid" class="question-item">
+          <!-- 行1：难度 tag + 题号 -->
+          <view class="question-head">
+            <text class="tag {{currentTag}}">{{item.difficulty}}</text>
+            <text class="question-no">第{{index + 1}}题</text>
+          </view>
+
+          <!-- 题干 -->
+          <text class="content-text" user-select>{{item.content}}</text>
+
+          <!-- 选项 -->
+          <block wx:if="{{item.options.length > 0}}">
+            <view wx:for="{{item.options}}" wx:for-item="opt" wx:key="*this" class="option">{{opt}}</view>
+          </block>
+
+          <!-- 查看答案链接 -->
+          <view class="answer-link" data-idx="{{index}}" bindtap="onShowAnswer">查看答案解析</view>
+
+          <!-- 答案与解析 -->
+          <view wx:if="{{item.showAnswer}}" class="answer-box">
+            <view class="answer-line">答案：{{item.answer}}</view>
+            <view class="answer-line">解析：{{item.analysis}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <!-- 底部固定操作栏 -->
+  <view wx:if="{{result}}" class="fixed-bar">
+    <view class="btn btn-plain bar-btn" hover-class="btn-hover" bindtap="onSave">💾 保存</view>
+    <view class="btn btn-primary bar-btn" hover-class="btn-hover" bindtap="onCopy">📋 复制全文</view>
+  </view>
+
+  <!-- AI 生成全屏 loading -->
+  <loading-ai show="{{generating}}" text="AI正在生成习题..." subText="正在调用豆包大模型，预计 10-30 秒" />
+</view>

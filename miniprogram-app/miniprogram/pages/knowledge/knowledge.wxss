@@ -1,0 +1,128 @@
+/* pages/knowledge/knowledge.wxss - 个人知识库样式 */
+.page {
+  padding-bottom: 40rpx;
+}
+
+/* ==================== 顶部搜索 + 新建 ==================== */
+.search-row {
+  display: flex;
+  align-items: center;
+  margin: 24rpx 24rpx 8rpx;
+}
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 24rpx;
+  height: 76rpx;
+  background: #FFFFFF;
+  border-radius: 38rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+}
+.search-icon {
+  margin-right: 12rpx;
+  font-size: 28rpx;
+}
+.search-input {
+  flex: 1;
+  height: 76rpx;
+  font-size: 28rpx;
+}
+.add-btn {
+  flex-shrink: 0;
+  height: 76rpx;
+  margin-left: 16rpx;
+  padding: 0 30rpx;
+  font-size: 26rpx;
+}
+
+/* ==================== 分类 chips ==================== */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8rpx 24rpx 0;
+}
+
+/* ==================== 添加表单 ==================== */
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1F2329;
+  margin-bottom: 8rpx;
+}
+/* 内容输入框加高 */
+.add-textarea {
+  height: 260rpx;
+}
+
+/* ==================== 知识列表 ==================== */
+.list-card {
+  padding: 26rpx 24rpx;
+}
+.item-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.item-title {
+  flex: 1;
+  min-width: 0;
+  margin-left: 16rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1F2329;
+}
+.item-content {
+  margin-bottom: 12rpx;
+}
+
+/* ==================== 详情弹层 ==================== */
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: rgba(31, 45, 61, 0.55);
+}
+.detail-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+  background: #FFFFFF;
+  border-radius: 24rpx 24rpx 0 0;
+  box-sizing: border-box;
+}
+.detail-head {
+  flex-shrink: 0;
+  padding: 36rpx 32rpx 20rpx;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.detail-title {
+  margin-top: 16rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #1F2329;
+}
+.detail-time {
+  margin-top: 8rpx;
+}
+/* 完整内容可滚动区域 */
+.detail-scroll {
+  flex: 1;
+  min-height: 0;
+  padding: 24rpx 32rpx;
+  box-sizing: border-box;
+}
+.detail-actions {
+  flex-shrink: 0;
+  display: flex;
+  padding: 20rpx 24rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  border-top: 1rpx solid #F2F3F5;
+}

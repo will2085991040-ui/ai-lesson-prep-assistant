@@ -1,0 +1,224 @@
+/* pages/index/index.wxss - 首页样式 */
+.page {
+  padding-bottom: 40rpx;
+}
+
+/* ==================== 顶部渐变头部 ==================== */
+.hero {
+  margin: 24rpx;
+  padding: 44rpx 36rpx;
+  border-radius: 16rpx;
+  background: linear-gradient(135deg, #1677FF 0%, #3D8EFF 100%);
+  color: #FFFFFF;
+  box-shadow: 0 8rpx 20rpx rgba(22, 119, 255, 0.28);
+}
+.hero-greeting {
+  font-size: 40rpx;
+  font-weight: 600;
+}
+.hero-sub {
+  margin-top: 12rpx;
+  font-size: 28rpx;
+  opacity: 0.92;
+}
+.hero-date {
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+
+/* ==================== 每日备课小提示 ==================== */
+.tip-card {
+  margin: 0 24rpx 24rpx;
+  padding: 24rpx 28rpx;
+  background: #E8F3FF;
+  border-radius: 16rpx;
+}
+.tip-head {
+  display: flex;
+  align-items: center;
+}
+.tip-icon {
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+.tip-label {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #1677FF;
+}
+.tip-text {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  color: #4E5969;
+  line-height: 1.7;
+}
+
+/* ==================== 今日课表 ==================== */
+.schedule-card {
+  margin: 0 24rpx 24rpx;
+  padding: 24rpx 28rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+}
+.schedule-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+.schedule-icon {
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+.schedule-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1F2329;
+}
+.schedule-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 0 8rpx;
+}
+.schedule-empty-text {
+  font-size: 26rpx;
+  color: #86909C;
+}
+.schedule-link {
+  font-size: 26rpx;
+  color: #1677FF;
+}
+.slot-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.slot-item {
+  display: flex;
+  align-items: center;
+  margin: 12rpx 16rpx 12rpx 0;
+  padding: 10rpx 20rpx;
+  background: #F2F3F5;
+  border-radius: 12rpx;
+}
+.slot-period {
+  font-size: 22rpx;
+  color: #86909C;
+  margin-right: 10rpx;
+}
+.slot-subject {
+  font-size: 26rpx;
+  color: #1F2329;
+  font-weight: 500;
+}
+
+/* ==================== 快捷入口网格 ==================== */
+.quick-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 12rpx 12rpx;
+}
+.quick-item {
+  width: calc(33.33% - 24rpx);
+  margin: 12rpx;
+  padding: 28rpx 16rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+  box-sizing: border-box;
+}
+.quick-icon {
+  font-size: 48rpx;
+  line-height: 1;
+}
+.quick-name {
+  margin-top: 14rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1F2329;
+}
+.quick-desc {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: #86909C;
+}
+
+/* ==================== 热门课题 ==================== */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.topic-loading {
+  padding: 40rpx 0;
+  text-align: center;
+  font-size: 24rpx;
+  color: #86909C;
+}
+.topic-empty {
+  padding: 40rpx 0;
+  text-align: center;
+  font-size: 26rpx;
+  color: #86909C;
+}
+.topic-item {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.topic-item:last-child {
+  border-bottom: none;
+}
+.topic-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #1F2329;
+}
+.topic-reason {
+  margin-top: 8rpx;
+}
+
+/* ==================== 最近备课 ==================== */
+.history-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.history-emoji {
+  width: 76rpx;
+  height: 76rpx;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F2F3F5;
+  border-radius: 16rpx;
+  font-size: 40rpx;
+  flex-shrink: 0;
+}
+.history-body {
+  flex: 1;
+  min-width: 0;
+}
+.history-title {
+  font-size: 28rpx;
+  color: #1F2329;
+  font-weight: 500;
+}
+.history-meta {
+  margin-top: 10rpx;
+  display: flex;
+  align-items: center;
+}
+.history-time {
+  margin-left: 16rpx;
+  font-size: 22rpx;
+  color: #86909C;
+}
+.history-all {
+  padding-top: 24rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #1677FF;
+}

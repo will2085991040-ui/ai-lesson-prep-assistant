@@ -1,0 +1,54 @@
+<!-- pages/recharge/recharge.wxml - 充值中心 -->
+<view class="page">
+
+  <!-- 余额卡（渐变蓝底白字） -->
+  <view class="balance-card">
+    <view class="balance-top">
+      <view class="balance-label">当前积分</view>
+      <view class="balance-tip">1元 ≈ 100积分</view>
+    </view>
+    <view class="balance-num">{{balance}}</view>
+    <view class="balance-meta">累计充值 {{totalRecharge}} · 累计消耗 {{totalConsume}}</view>
+  </view>
+
+  <!-- 兑换码充值 -->
+  <view class="card">
+    <view class="card-title">兑换码充值</view>
+    <view class="form-tip">兑换码可联系管理员获取</view>
+    <view class="redeem-row">
+      <input class="redeem-input" placeholder="请输入兑换码" value="{{code}}" bindinput="onCodeInput" />
+      <view class="{{redeemBtnClass}}" hover-class="btn-hover" bindtap="onRedeem">{{redeemText}}</view>
+    </view>
+  </view>
+
+  <!-- 充值套餐 -->
+  <view class="section-title">充值套餐</view>
+  <view class="card">
+    <view class="package-item" wx:for="{{packages}}" wx:key="price">
+      <view class="package-info">
+        <view class="package-price">¥{{item.price}}</view>
+        <view class="package-credits">得 {{item.credits}} 积分</view>
+      </view>
+      <view class="btn btn-plain package-btn" hover-class="btn-hover" bindtap="onPay">微信支付</view>
+    </view>
+    <view class="form-tip">企业主体开通微信支付后，此入口可直接接入微信支付</view>
+  </view>
+
+  <!-- 积分明细 -->
+  <view class="section-title">积分明细</view>
+  <view class="card">
+    <view class="txn-item" wx:for="{{transactions}}" wx:key="key">
+      <view class="txn-main">
+        <view class="txn-remark ellipsis">{{item.remark}}</view>
+        <view class="txn-time text-secondary">{{item.time}}</view>
+      </view>
+      <view class="txn-credits {{item.tagClass}}">{{item.creditsText}}</view>
+    </view>
+    <view class="empty txn-empty" wx:if="{{!transactions.length}}">
+      <view class="empty-icon">📋</view>
+      <text>暂无积分明细</text>
+    </view>
+  </view>
+
+  <view class="footer-space"></view>
+</view>

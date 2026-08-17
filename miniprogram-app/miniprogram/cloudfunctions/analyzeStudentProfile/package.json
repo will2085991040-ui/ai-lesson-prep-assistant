@@ -1,0 +1,10 @@
+{
+  "name": "analyze-student-profile",
+  "version": "1.0.0",
+  "description": "AI备课助手-学情诊断云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "axios": "^1.6.8"
+  }
+}

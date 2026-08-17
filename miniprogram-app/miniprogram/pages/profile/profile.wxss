@@ -1,0 +1,355 @@
+/* pages/profile/profile.wxss - 我的页面样式 */
+
+/* ==================== 头部卡片 ==================== */
+.header-card {
+  display: flex;
+  align-items: center;
+  margin: 24rpx;
+  padding: 44rpx 32rpx;
+  background: linear-gradient(135deg, #1677FF, #3D8EFF);
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 20rpx rgba(22, 119, 255, 0.28);
+}
+.avatar {
+  width: 108rpx;
+  height: 108rpx;
+  flex-shrink: 0;
+  margin-right: 28rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56rpx;
+}
+.header-text {
+  flex: 1;
+  min-width: 0;
+}
+.header-title {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.header-sub {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 头部头像按钮（重置 button 默认样式） */
+.avatar-btn {
+  width: 108rpx;
+  height: 108rpx;
+  flex-shrink: 0;
+  margin-right: 28rpx;
+  padding: 0;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatar-btn::after {
+  border: none;
+}
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+}
+.avatar-default {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56rpx;
+}
+
+/* 昵称输入框 */
+.nickname-input {
+  width: 100%;
+  height: 60rpx;
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 60rpx;
+}
+.nickname-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+}
+
+/* ==================== 积分余额 ==================== */
+.wallet-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wallet-left {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+}
+.wallet-label {
+  font-size: 28rpx;
+  color: #1F2329;
+  margin-right: 20rpx;
+}
+.wallet-num {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #1677FF;
+}
+.wallet-btn {
+  height: 64rpx;
+  padding: 0 32rpx;
+  font-size: 26rpx;
+}
+
+/* ==================== 备课统计 ==================== */
+.stat-total {
+  font-size: 26rpx;
+  color: #4E5969;
+  margin-bottom: 20rpx;
+}
+.stat-total-num {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1677FF;
+  margin: 0 6rpx;
+}
+.stat-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+.stat-item {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16rpx 0;
+  box-sizing: border-box;
+}
+.stat-num {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #1677FF;
+}
+.stat-label {
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: #86909C;
+}
+
+/* ==================== 我的课表 ==================== */
+.day-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20rpx;
+}
+.day-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 84rpx;
+  height: 60rpx;
+  padding: 0 20rpx;
+  margin: 0 12rpx 12rpx 0;
+  border-radius: 30rpx;
+  background: #F2F3F5;
+  color: #4E5969;
+  font-size: 24rpx;
+  border: 2rpx solid transparent;
+  box-sizing: border-box;
+}
+.day-chip-active {
+  background: #E8F3FF;
+  color: #1677FF;
+  border-color: #1677FF;
+  font-weight: 600;
+}
+.slot-list {
+  margin-bottom: 20rpx;
+}
+.slot-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+.slot-input {
+  height: 64rpx;
+  padding: 0 20rpx;
+  background: #F7F8FA;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  box-sizing: border-box;
+}
+.slot-period {
+  width: 170rpx;
+  flex-shrink: 0;
+}
+.slot-subject {
+  flex: 1;
+  margin: 0 16rpx;
+}
+.slot-remove {
+  width: 44rpx;
+  height: 44rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C9CDD4;
+  font-size: 28rpx;
+}
+.slot-empty {
+  padding: 24rpx 0;
+  text-align: center;
+  font-size: 26rpx;
+  color: #86909C;
+}
+.slot-add-btn {
+  height: 64rpx;
+  font-size: 26rpx;
+  border-radius: 32rpx;
+}
+
+/* ==================== 工具箱 ==================== */
+.tool-card {
+  padding: 8rpx 24rpx;
+}
+.tool-row {
+  display: flex;
+  align-items: center;
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.tool-row:last-child {
+  border-bottom: none;
+}
+.tool-icon {
+  width: 68rpx;
+  height: 68rpx;
+  margin-right: 20rpx;
+  border-radius: 14rpx;
+  background: #F7F8FA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  flex-shrink: 0;
+}
+.tool-name {
+  flex: 1;
+  font-size: 28rpx;
+  color: #1F2329;
+}
+
+/* ==================== 我的收藏 ==================== */
+.fav-card {
+  padding: 8rpx 24rpx;
+}
+.fav-item {
+  display: flex;
+  align-items: center;
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.fav-item:last-child {
+  border-bottom: none;
+}
+.fav-emoji {
+  width: 68rpx;
+  height: 68rpx;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+  border-radius: 14rpx;
+  background: #F7F8FA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+}
+.fav-main {
+  flex: 1;
+  min-width: 0;
+}
+.fav-title {
+  font-size: 28rpx;
+  color: #1F2329;
+}
+.fav-time {
+  margin-top: 4rpx;
+}
+.fav-arrow {
+  width: 14rpx;
+  height: 14rpx;
+  margin-left: 12rpx;
+  border-top: 3rpx solid #C9CDD4;
+  border-right: 3rpx solid #C9CDD4;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+.fav-overflow {
+  padding: 16rpx 0 8rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #86909C;
+}
+
+/* ==================== 提醒设置 ==================== */
+.form-switch {
+  margin-left: auto;
+}
+.form-disabled {
+  opacity: 0.4;
+}
+
+/* ==================== 使用帮助 ==================== */
+.faq-item {
+  padding: 8rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.faq-item:last-child {
+  border-bottom: none;
+}
+.faq-header {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+}
+.faq-q {
+  flex: 1;
+  min-width: 0;
+  font-size: 28rpx;
+  color: #1F2329;
+}
+.faq-arrow {
+  width: 14rpx;
+  height: 14rpx;
+  margin-left: 12rpx;
+  border-right: 3rpx solid #86909C;
+  border-bottom: 3rpx solid #86909C;
+  transform: rotate(45deg);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+.faq-arrow-open {
+  transform: rotate(225deg);
+}
+.faq-a {
+  padding: 0 0 20rpx;
+}
+
+/* ==================== 底部 ==================== */
+.clear-btn {
+  margin: 40rpx 24rpx 0;
+}
+.footer-space {
+  height: 60rpx;
+}

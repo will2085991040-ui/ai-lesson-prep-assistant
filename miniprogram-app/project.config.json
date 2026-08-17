@@ -1,0 +1,46 @@
+{
+  "description": "AI备课助手 - 基于微信云开发 + 豆包大模型的全学科智能备课小程序",
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "miniprogram/cloudfunctions/",
+  "compileType": "miniprogram",
+  "appid": "wx1a1213e6a836a1cd",
+  "projectname": "ai-lesson-prep-assistant",
+  "libVersion": "3.4.10",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "urlCheck": false,
+    "coverView": true,
+    "ignoreUploadUnusedFiles": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true
+  },
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  }
+}

@@ -1,0 +1,97 @@
+/* pages/exercises/exercises.wxss - 分层习题样式 */
+.page {
+  padding-bottom: 40rpx;
+}
+
+/* 题型：label 与 chips 上下排列 */
+.form-item-column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8rpx;
+}
+
+/* ==================== tab 条 ==================== */
+.tab-bar {
+  display: flex;
+  padding: 12rpx;
+}
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 72rpx;
+  margin: 0 6rpx;
+  border-radius: 36rpx;
+  background: #F2F3F5;
+  color: #4E5969;
+  font-size: 26rpx;
+  box-sizing: border-box;
+}
+.tab-active {
+  background: #E8F3FF;
+  color: #1677FF;
+  font-weight: 600;
+}
+.tab-name {
+  display: inline-block;
+}
+.tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32rpx;
+  height: 32rpx;
+  margin-left: 8rpx;
+  padding: 0 8rpx;
+  border-radius: 16rpx;
+  background: #FFFFFF;
+  color: #1677FF;
+  font-size: 20rpx;
+}
+
+/* ==================== 题目列表 ==================== */
+.question-item {
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.question-item:last-child {
+  border-bottom: none;
+}
+.question-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.question-no {
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  color: #86909C;
+}
+.option {
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  color: #86909C;
+  line-height: 1.7;
+}
+.answer-link {
+  display: inline-block;
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #1677FF;
+}
+.answer-box {
+  margin-top: 16rpx;
+  padding: 20rpx;
+  background: #F0F7FF;
+  border-radius: 12rpx;
+}
+.answer-line {
+  font-size: 25rpx;
+  color: #4E5969;
+  line-height: 1.8;
+}

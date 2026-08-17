@@ -1,0 +1,17 @@
+<!-- collapsible-section.wxml - 折叠面板组件模板 -->
+<view class="collapsible">
+  <!-- 标题栏：点击切换展开状态 -->
+  <view class="header" hover-class="header-hover" bindtap="onToggle">
+    <view class="header-left">
+      <!-- 序号徽标 -->
+      <view wx:if="{{showNumber && number}}" class="number">{{number}}</view>
+      <view class="title">{{title}}</view>
+    </view>
+    <!-- 展开箭头：展开时旋转 180 度 -->
+    <view class="arrow {{isOpen ? 'arrow-open' : ''}}"></view>
+  </view>
+  <!-- 内容区：默认插槽，由使用方传入正文 -->
+  <view wx:if="{{isOpen}}" class="body">
+    <slot></slot>
+  </view>
+</view>

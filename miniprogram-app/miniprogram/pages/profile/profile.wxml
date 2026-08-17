@@ -1,0 +1,156 @@
+<!-- pages/profile/profile.wxml - 我的（tabBar 页） -->
+<view class="page">
+
+  <!-- 头部卡片 -->
+  <view class="header-card">
+    <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+      <image wx:if="{{user.avatarFileID}}" class="avatar-img" src="{{user.avatarFileID}}" mode="aspectFill" />
+      <view wx:else class="avatar-default">👩‍🏫</view>
+    </button>
+    <view class="header-text">
+      <input type="nickname" class="nickname-input" value="{{user.nickname}}" placeholder="点击设置昵称" placeholder-class="nickname-placeholder" bindinput="onNicknameInput" bindblur="onNicknameBlur" />
+      <view class="header-sub">坚持备课，桃李满天下</view>
+    </view>
+  </view>
+
+  <!-- 积分余额 -->
+  <view class="card wallet-row" bindtap="goRecharge">
+    <view class="wallet-left">
+      <view class="wallet-label">💰 积分余额</view>
+      <view class="wallet-num">{{walletBalance}}</view>
+    </view>
+    <view class="btn btn-ghost wallet-btn" hover-class="btn-hover" catchtap="goRecharge">去充值</view>
+  </view>
+
+  <!-- 备课统计 -->
+  <view class="section-title">备课统计</view>
+  <view class="card">
+    <view class="stat-total">累计备课 <text class="stat-total-num">{{stats.total}}</text> 次</view>
+    <view class="stat-grid">
+      <view class="stat-item">
+        <view class="stat-num">{{stats.lessonPlans}}</view>
+        <view class="stat-label">教案</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-num">{{stats.pptOutlines}}</view>
+        <view class="stat-label">课件大纲</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-num">{{stats.coursewares}}</view>
+        <view class="stat-label">AI课件</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-num">{{stats.exercises}}</view>
+        <view class="stat-label">习题</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-num">{{stats.analyses}}</view>
+        <view class="stat-label">学情</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 我的课表 -->
+  <view class="section-title">📅 我的课表</view>
+  <view class="card">
+    <!-- 星期 chips -->
+    <view class="day-tabs">
+      <view
+        wx:for="{{weekLabels}}"
+        wx:key="*this"
+        class="day-chip {{activeDay === index ? 'day-chip-active' : ''}}"
+        data-index="{{index}}"
+        bindtap="onDayTap">{{item}}</view>
+    </view>
+
+    <!-- 当前 day 的课节列表 -->
+    <view class="slot-list">
+      <view class="slot-row" wx:for="{{schedule[weekKeys[activeDay]]}}">
+        <input class="slot-input slot-period" value="{{item.period}}" placeholder="节次" placeholder-class="form-placeholder" data-index="{{index}}" data-field="period" bindinput="onSlotInput" />
+        <input class="slot-input slot-subject" value="{{item.subject}}" placeholder="科目" placeholder-class="form-placeholder" data-index="{{index}}" data-field="subject" bindinput="onSlotInput" />
+        <view class="slot-remove" data-index="{{index}}" bindtap="onRemoveSlot">✕</view>
+      </view>
+      <view wx:if="{{!schedule[weekKeys[activeDay]].length}}" class="slot-empty">这一天还没排课</view>
+    </view>
+
+    <view class="btn btn-ghost slot-add-btn" hover-class="btn-hover" bindtap="onAddSlot">+ 添加一节</view>
+    <view class="form-tip">课表保存在本机，首页会显示今天的课</view>
+  </view>
+
+  <!-- 工具箱 -->
+  <view class="section-title">工具箱</view>
+  <view class="card tool-card">
+    <view class="tool-row" bindtap="goWords">
+      <view class="tool-icon">📖</view>
+      <view class="tool-name">单词本</view>
+      <view class="form-arrow"></view>
+    </view>
+    <view class="tool-row" bindtap="goMistakes">
+      <view class="tool-icon">✏️</view>
+      <view class="tool-name">错题本</view>
+      <view class="form-arrow"></view>
+    </view>
+    <view class="tool-row" bindtap="goKnowledge">
+      <view class="tool-icon">📚</view>
+      <view class="tool-name">知识库</view>
+      <view class="form-arrow"></view>
+    </view>
+    <view class="tool-row" bindtap="goPromptBook">
+      <view class="tool-icon">💡</view>
+      <view class="tool-name">提示词宝典</view>
+      <view class="form-arrow"></view>
+    </view>
+  </view>
+
+  <!-- 我的收藏 -->
+  <view class="section-title">我的收藏</view>
+  <view class="card fav-card" wx:if="{{favorites.length}}">
+    <view class="fav-item" wx:for="{{favorites}}" wx:key="id" data-index="{{index}}" bindtap="onFavoriteTap">
+      <view class="fav-emoji">{{item.emoji}}</view>
+      <view class="fav-main">
+        <view class="fav-title ellipsis">{{item.title}}</view>
+        <view class="fav-time text-secondary">{{item.time}}</view>
+      </view>
+      <view class="fav-arrow"></view>
+    </view>
+    <view class="fav-overflow" wx:if="{{favoritesOverflow}}">仅显示前 20 条收藏</view>
+  </view>
+  <view class="empty" wx:if="{{!favorites.length}}">
+    <view class="empty-icon">⭐</view>
+    <text>还没有收藏内容</text>
+  </view>
+
+  <!-- 提醒设置 -->
+  <view class="section-title">提醒设置</view>
+  <view class="card">
+    <view class="form-item">
+      <view class="form-label">每日备课提醒</view>
+      <switch class="form-switch" checked="{{reminder.enabled}}" bindchange="onReminderSwitch" color="#1677FF" />
+    </view>
+    <picker mode="time" value="{{reminder.time}}" bindchange="onTimeChange" disabled="{{!reminder.enabled}}">
+      <view class="form-item {{reminder.enabled ? '' : 'form-disabled'}}">
+        <view class="form-label">提醒时间</view>
+        <view class="form-value">{{reminder.time}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+    <view class="form-tip">提醒设置保存在本地，可与手机日程配合使用</view>
+  </view>
+
+  <!-- 使用帮助 -->
+  <view class="section-title">使用帮助</view>
+  <view class="card">
+    <view class="faq-item" wx:for="{{faqList}}" wx:key="q" data-index="{{index}}" bindtap="onFaqToggle">
+      <view class="faq-header">
+        <view class="faq-q">❓ {{item.q}}</view>
+        <view class="faq-arrow {{item.open ? 'faq-arrow-open' : ''}}"></view>
+      </view>
+      <view class="faq-a content-text" wx:if="{{item.open}}">{{item.a}}</view>
+    </view>
+  </view>
+
+  <!-- 清除本地缓存 -->
+  <view class="btn btn-danger clear-btn" hover-class="btn-hover" bindtap="onClearCache">清除本地缓存</view>
+
+  <!-- 底部占位 -->
+  <view class="footer-space"></view>
+</view>

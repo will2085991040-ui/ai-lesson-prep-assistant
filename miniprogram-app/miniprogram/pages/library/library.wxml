@@ -1,0 +1,59 @@
+<!-- pages/library/library.wxml - 备课库（tabBar 页） -->
+<view class="page">
+
+  <!-- 顶部搜索框 -->
+  <view class="search-bar">
+    <view class="search-icon">🔍</view>
+    <input class="search-input" placeholder="搜索课题/知识点" placeholder-class="form-placeholder" value="{{keyword}}" bindinput="onKeywordInput" />
+  </view>
+
+  <!-- 类型 Tab -->
+  <view class="tabs">
+    <view
+      class="tab {{activeTab === item.key ? 'tab-active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      data-key="{{item.key}}"
+      bindtap="onTabChange"
+    >{{item.name}}</view>
+  </view>
+
+  <!-- 记录列表（左滑删除） -->
+  <view class="list">
+    <view class="record" wx:for="{{list}}" wx:key="_id">
+      <!-- 删除按钮（左滑露出） -->
+      <view class="delete-btn" data-id="{{item._id}}" catchtap="onDelete">删除</view>
+
+      <!-- 记录主体 -->
+      <view
+        class="record-body {{swipedId === item._id ? 'record-open' : ''}}"
+        data-id="{{item._id}}"
+        data-type="{{item.type}}"
+        bindtouchstart="onTouchStart"
+        bindtouchmove="onTouchMove"
+        bindtouchend="onTouchEnd"
+        bindtap="onItemTap"
+      >
+        <view class="record-emoji">{{item.typeEmoji}}</view>
+        <view class="record-main">
+          <view class="record-title ellipsis">{{item.title}}</view>
+          <view class="record-meta text-secondary ellipsis">{{item.metaLine}}</view>
+          <view class="record-time text-secondary">{{item.time}}</view>
+        </view>
+        <view class="tag tag-blue record-type">{{item.typeName}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空态：搜索无结果 -->
+  <view class="empty" wx:if="{{!loading && !list.length && keyword}}">
+    <view class="empty-icon">🔍</view>
+    <text>没有找到相关内容</text>
+  </view>
+
+  <!-- 空态：库为空 -->
+  <view class="empty" wx:if="{{!loading && !list.length && !keyword}}">
+    <view class="empty-icon">📚</view>
+    <text>备课库还是空的，快去生成一份吧</text>
+  </view>
+</view>

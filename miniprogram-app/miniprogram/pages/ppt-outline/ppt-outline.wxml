@@ -1,0 +1,77 @@
+<!-- pages/ppt-outline/ppt-outline.wxml - 课件大纲 -->
+<view class="page {{result ? 'has-fixed-bar' : ''}}">
+
+  <!-- 表单卡片 -->
+  <view class="card">
+    <!-- 课题 -->
+    <view class="form-item">
+      <view class="form-label required">课题</view>
+      <input class="form-input" placeholder="请输入课题，如：荷塘月色" placeholder-class="form-placeholder" value="{{form.topic}}" bindinput="onTopicInput" />
+    </view>
+
+    <!-- 页数 slider -->
+    <view class="form-item form-item-column">
+      <view class="form-label">页数</view>
+      <view class="slider-row">
+        <slider class="slider" min="5" max="20" step="1" value="{{form.pages}}" activeColor="#1677FF" block-size="24" bindchange="onPagesChange" />
+        <text class="pages-num">共 {{form.pages}} 页</text>
+      </view>
+    </view>
+
+    <!-- 风格 -->
+    <picker mode="selector" range="{{styles}}" value="{{styleIndex}}" bindchange="onStyleChange">
+      <view class="form-item">
+        <view class="form-label">风格</view>
+        <view class="form-value">{{form.style}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 生成按钮 -->
+  <view class="card">
+    <view class="btn btn-primary" hover-class="btn-hover" bindtap="onGenerate">✨ 生成课件大纲</view>
+  </view>
+
+  <!-- 课件封面 -->
+  <view class="card">
+    <view class="cover-title">课件封面</view>
+    <image wx:if="{{coverFileId}}" class="cover-img" src="{{coverFileId}}" mode="widthFix" />
+    <view class="cover-empty" wx:if="{{!coverFileId}}">为课件生成一张专属封面图（消耗 25 积分）</view>
+    <view class="btn btn-ghost cover-btn" hover-class="btn-hover" bindtap="onGenerateCover">{{coverFileId ? '🔄 重新生成封面' : '🎨 生成封面图'}}</view>
+  </view>
+
+  <!-- 结果区 -->
+  <block wx:if="{{result}}">
+    <!-- 结果头部：标题 + 重新生成 -->
+    <view class="result-header">
+      <view class="section-title result-title">大纲共 {{result.length}} 页</view>
+      <view class="btn btn-ghost regen-btn" hover-class="btn-hover" bindtap="onGenerate">🔄 重新生成</view>
+    </view>
+
+    <!-- 逐页卡片 -->
+    <view class="card">
+      <view wx:for="{{result}}" wx:key="title" class="slide-item">
+        <!-- 左侧圆形序号徽标 -->
+        <view class="slide-badge">{{index + 1}}</view>
+        <view class="slide-body">
+          <view class="slide-title">{{item.title}}</view>
+          <text class="content-text" user-select>{{item.content}}</text>
+          <view class="slide-tip text-secondary">🖼 配图建议：{{item.visual}}</view>
+          <view class="slide-tip text-secondary">✨ 动画建议：{{item.animation}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 底部固定操作栏 -->
+  <view wx:if="{{result}}" class="fixed-bar">
+    <view class="btn btn-plain bar-btn" hover-class="btn-hover" bindtap="onSave">💾 保存</view>
+    <view class="btn btn-primary bar-btn" hover-class="btn-hover" bindtap="onExport">📋 导出文本</view>
+  </view>
+
+  <!-- AI 生成全屏 loading -->
+  <loading-ai show="{{generating}}" text="AI正在生成课件大纲..." subText="正在调用豆包大模型，预计 10-30 秒" />
+
+  <!-- AI 生成封面图 loading -->
+  <loading-ai show="{{generatingImage}}" text="AI正在生成封面图..." subText="正在调用豆包生图模型，请稍候..." />
+</view>

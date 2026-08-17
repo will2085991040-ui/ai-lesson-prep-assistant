@@ -1,0 +1,73 @@
+/* pages/prompt-book/prompt-book.wxss - 提示词宝典样式 */
+.page {
+  padding-bottom: 40rpx;
+}
+
+/* ==================== 顶部说明 ==================== */
+.book-tip {
+  margin: 24rpx 24rpx 8rpx;
+  padding: 0;
+}
+
+/* ==================== 提示词卡片 ==================== */
+.prompt-card {
+  padding: 28rpx 24rpx;
+}
+.prompt-head {
+  display: flex;
+  align-items: flex-start;
+}
+.prompt-badge {
+  width: 48rpx;
+  height: 48rpx;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12rpx;
+  background: #E8F3FF;
+  color: #1677FF;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+.prompt-main {
+  flex: 1;
+  min-width: 0;
+}
+.prompt-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1F2329;
+}
+.prompt-desc {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #86909C;
+  line-height: 1.6;
+}
+
+/* 操作按钮行 */
+.prompt-actions {
+  display: flex;
+  margin-top: 20rpx;
+}
+.small-btn {
+  height: 64rpx;
+  padding: 0 32rpx;
+  font-size: 26rpx;
+  border-radius: 32rpx;
+}
+.copy-btn {
+  margin-left: 16rpx;
+}
+
+/* 展开的模板内容：浅色底块 */
+.prompt-template {
+  margin-top: 20rpx;
+  padding: 24rpx;
+  background: #F7F8FA;
+  border-radius: 12rpx;
+  white-space: pre-wrap;
+  word-break: break-all;
+}

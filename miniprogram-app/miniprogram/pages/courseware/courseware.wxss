@@ -1,0 +1,252 @@
+/* pages/courseware/courseware.wxss - AI 课件样式 */
+.page {
+  padding-bottom: 40rpx;
+}
+
+/* ==================== 表单 ==================== */
+/* label 与控件上下排列 */
+.form-item-column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+/* 页数 slider 行 */
+.slider-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+.slider {
+  flex: 1;
+  margin: 0;
+}
+.pages-num {
+  width: 140rpx;
+  text-align: right;
+  font-size: 26rpx;
+  color: #1677FF;
+  flex-shrink: 0;
+}
+/* 课件模板 chips 容器 */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8rpx;
+}
+/* 老师补充要求：比默认矮一点 */
+.courseware-textarea {
+  height: 120rpx;
+}
+
+/* ==================== 结果区操作行 ==================== */
+.ops-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 24rpx 12rpx;
+}
+.ops-btn {
+  flex: 1;
+  height: 72rpx;
+  margin: 0 8rpx 16rpx;
+  padding: 0 12rpx;
+  border-radius: 36rpx;
+  font-size: 25rpx;
+}
+.ops-btn:first-child {
+  margin-left: 0;
+}
+.ops-btn:last-child {
+  margin-right: 0;
+}
+.ops-tip {
+  margin: 0 24rpx 20rpx;
+}
+
+/* ==================== 幻灯片卡片 ==================== */
+.slide-item {
+  display: flex;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.slide-item:last-child {
+  border-bottom: none;
+}
+.slide-badge {
+  width: 52rpx;
+  height: 52rpx;
+  margin-right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1677FF;
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-size: 26rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.slide-body {
+  flex: 1;
+  min-width: 0;
+}
+.slide-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1F2329;
+  margin-bottom: 8rpx;
+}
+/* 页内配图 */
+.slide-img {
+  width: 100%;
+  border-radius: 12rpx;
+  margin: 8rpx 0 12rpx;
+}
+.slide-tip {
+  margin-top: 6rpx;
+}
+/* 单页配图小按钮 */
+.img-btn {
+  display: inline-flex;
+  height: 60rpx;
+  margin-top: 16rpx;
+  padding: 0 28rpx;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+}
+
+/* ==================== 讲解词 ==================== */
+.notes-toggle {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #1677FF;
+}
+.notes-box {
+  margin-top: 12rpx;
+  padding: 20rpx;
+  background: #E8F3FF;
+  border-radius: 12rpx;
+}
+
+/* ==================== 说课稿 / 随堂练习 / 开场视频 弹层 ==================== */
+/* 开场视频播放器 */
+.video-player {
+  width: 100%;
+  border-radius: 12rpx;
+  background: #000000;
+}
+/* 全屏半透明遮罩（复用 mistakes 页弹层风格） */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx 32rpx;
+  background: rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+}
+/* 白色弹层面板：宽 90% 高 80%，纵向排布 */
+.modal-panel {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.modal-head {
+  flex-shrink: 0;
+  padding: 28rpx 28rpx 20rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1F2329;
+  text-align: center;
+}
+.modal-body {
+  flex: 1;
+  min-height: 0;
+  padding: 0 28rpx;
+  box-sizing: border-box;
+}
+.modal-foot {
+  flex-shrink: 0;
+  display: flex;
+  padding: 20rpx 28rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #FFFFFF;
+  box-shadow: 0 -4rpx 16rpx rgba(31, 45, 61, 0.06);
+}
+
+/* ==================== 随堂练习（挖空）题卡 ==================== */
+.cloze-item {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.cloze-item:last-child {
+  border-bottom: none;
+}
+.cloze-head {
+  display: flex;
+  align-items: flex-start;
+}
+.cloze-no {
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1677FF;
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-size: 24rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.cloze-content {
+  flex: 1;
+  min-width: 0;
+}
+.cloze-options {
+  margin-top: 12rpx;
+  padding-left: 60rpx;
+}
+.cloze-option {
+  display: block;
+  font-size: 26rpx;
+  color: #4E5969;
+  line-height: 1.9;
+  word-break: break-all;
+}
+.cloze-toggle {
+  display: inline-block;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #1677FF;
+}
+/* 挖空题答案块（浅绿） */
+.answer-box {
+  margin-top: 12rpx;
+  padding: 18rpx 20rpx;
+  background: #E8FFEA;
+  border-radius: 12rpx;
+}
+/* 选择题答案+解析块（浅蓝） */
+.analysis-box {
+  margin-top: 12rpx;
+  padding: 18rpx 20rpx;
+  background: #E8F3FF;
+  border-radius: 12rpx;
+}
+.cloze-line {
+  display: block;
+  font-size: 25rpx;
+  color: #4E5969;
+  line-height: 1.8;
+  word-break: break-all;
+}

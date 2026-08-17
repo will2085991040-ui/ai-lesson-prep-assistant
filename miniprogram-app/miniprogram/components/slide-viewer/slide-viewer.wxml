@@ -1,0 +1,60 @@
+<!-- slide-viewer.wxml - 全屏课件放映组件模板（小视频/小动画体验） -->
+<view wx:if="{{show}}" class="viewer-mask" catchtouchmove="noop">
+  <!-- 顶部栏：左标题（省略号）+ 右退出 -->
+  <view class="viewer-top">
+    <view class="viewer-title">{{title}}</view>
+    <view class="viewer-exit" hover-class="viewer-hover" bindtap="onClose">✕ 退出</view>
+  </view>
+
+  <!-- 自动播放提示（仅播放中显示） -->
+  <view wx:if="{{playing}}" class="auto-tip">自动播放中 · 5 秒/页</view>
+
+  <!-- 幻灯片主体（占满剩余高度） -->
+  <swiper wx:if="{{slides.length}}" class="swiper" current="{{current}}" bindchange="onSwiperChange" circular>
+    <swiper-item wx:for="{{slides}}" wx:key="idx" wx:for-item="item" wx:for-index="pageIndex">
+      <!-- 翻页入场动画容器（仅当前页播放 slideIn） -->
+      <view class="slide-panel {{pageIndex === current ? 'slide-enter' : ''}}">
+        <!-- 整页：纵向排列 标题 + 配图/占位块 + 要点 -->
+        <view class="slide-page">
+          <!-- 顶部大标题（居中，含页码角标） -->
+          <view class="page-title-row">
+            <view class="page-badge">{{pageIndex + 1}}</view>
+            <text class="page-title" user-select>{{item.title}}</text>
+          </view>
+          <!-- 中部：有配图显示 Ken Burns 动态图片（缓缓缩放平移），无配图显示蓝色渐变占位块 + 该页要点 -->
+          <view class="slide-visual">
+            <view wx:if="{{item.imageFileID}}" class="kb-wrap {{pageIndex % 2 === 0 ? 'kb-a' : 'kb-b'}}">
+              <image class="slide-img" src="{{item.imageFileID}}" mode="aspectFill" />
+            </view>
+            <view wx:else class="slide-placeholder">
+              <text class="placeholder-text" user-select>{{item.content}}</text>
+            </view>
+          </view>
+          <!-- 下方要点区（白色反色正文，有配图时展示） -->
+          <text wx:if="{{item.imageFileID}}" class="slide-content" user-select>{{item.content}}</text>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <!-- 讲解词面板（浅色底深色字，最多 6 行滚动） -->
+  <view wx:if="{{notesVisible}}" class="notes-panel">
+    <text class="notes-text" user-select>{{slides[current].speakerNotes || '暂无讲解词'}}</text>
+  </view>
+
+  <!-- 底部进度条：自动播放时走 5 秒动画，否则按当前页比例直接显示宽度 -->
+  <view class="progress-track">
+    <view class="progress-fill {{playing ? 'progress-anim' : ''}}" style="width:{{progressPct}}%"></view>
+  </view>
+
+  <!-- 底部固定栏：页码 + 自动播放开关 + 讲解词开关 + 上下页按钮 -->
+  <view class="viewer-bottom">
+    <text class="page-count">第 {{current + 1}}/{{slides.length}} 页</text>
+    <view class="play-btn {{playing ? 'play-btn-active' : ''}}" hover-class="viewer-hover" bindtap="onTogglePlay">{{playing ? '⏸ 暂停' : '▶ 自动播放'}}</view>
+    <view class="notes-btn" hover-class="viewer-hover" bindtap="onToggleNotes">{{notesVisible ? '收起讲解词' : '查看讲解词'}}</view>
+    <view class="nav-group">
+      <view class="nav-btn" hover-class="viewer-hover" bindtap="onPrev">上一页</view>
+      <view class="nav-btn" hover-class="viewer-hover" bindtap="onNext">下一页</view>
+    </view>
+  </view>
+</view>

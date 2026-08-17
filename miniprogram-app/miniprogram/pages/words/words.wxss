@@ -1,0 +1,121 @@
+/* pages/words/words.wxss - 单词本样式 */
+.page {
+  padding-bottom: 40rpx;
+}
+
+/* ==================== 顶部搜索 + 添加 ==================== */
+.search-row {
+  display: flex;
+  align-items: center;
+  margin: 24rpx 24rpx 8rpx;
+}
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 24rpx;
+  height: 76rpx;
+  background: #FFFFFF;
+  border-radius: 38rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+}
+.search-icon {
+  margin-right: 12rpx;
+  font-size: 28rpx;
+}
+.search-input {
+  flex: 1;
+  height: 76rpx;
+  font-size: 28rpx;
+}
+.add-btn {
+  flex-shrink: 0;
+  height: 76rpx;
+  margin-left: 16rpx;
+  padding: 0 30rpx;
+  font-size: 26rpx;
+}
+
+/* ==================== 卡片标题 ==================== */
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1F2329;
+  margin-bottom: 8rpx;
+}
+
+/* 数量 slider：label 与 slider 上下排列 */
+.form-item-column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.slider-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+.slider {
+  flex: 1;
+  margin: 0;
+}
+.count-num {
+  width: 140rpx;
+  text-align: right;
+  font-size: 26rpx;
+  color: #1677FF;
+  flex-shrink: 0;
+}
+
+/* ==================== 单词列表 ==================== */
+.list {
+  padding-bottom: 20rpx;
+}
+.word-item {
+  display: flex;
+  align-items: flex-start;
+  margin: 0 24rpx 20rpx;
+  padding: 26rpx 24rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+}
+.word-main {
+  flex: 1;
+  min-width: 0;
+}
+.word-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.word-text {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1F2329;
+}
+.word-phonetic {
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  color: #86909C;
+}
+.word-meaning {
+  margin-top: 8rpx;
+  font-size: 28rpx;
+  color: #1F2329;
+}
+.word-example {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  font-style: italic;
+  color: #4E5969;
+  line-height: 1.7;
+  word-break: break-all;
+}
+.word-delete {
+  flex-shrink: 0;
+  margin-left: 20rpx;
+  padding: 4rpx 0;
+  font-size: 24rpx;
+  color: #F53F3F;
+}

@@ -1,0 +1,93 @@
+/* pages/analysis/analysis.wxss - 学情诊断页面样式 */
+
+/* 表单卡片顶部留白 */
+.form-card {
+  margin-top: 24rpx;
+}
+
+/* 表单块：label 在上、控件在下 */
+.form-block {
+  padding: 26rpx 4rpx 12rpx;
+}
+.form-block .form-label {
+  width: auto;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+/* 生成按钮 */
+.generate-btn {
+  margin-top: 24rpx;
+}
+
+/* 结果标题（右侧带重新生成按钮） */
+.result-title-text {
+  flex: 0 0 auto;
+}
+.regen-btn {
+  margin-left: auto;
+  padding: 8rpx 26rpx;
+  background: #E8F3FF;
+  color: #1677FF;
+  font-size: 24rpx;
+  font-weight: 500;
+  border-radius: 32rpx;
+}
+
+/* 卡片标题 */
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1F2329;
+  margin-bottom: 16rpx;
+}
+
+/* 薄弱点列表 */
+.weak-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.weak-item:last-child {
+  border-bottom: none;
+}
+.weak-index {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 14rpx;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #FFF3E8;
+  color: #FF7D00;
+  font-size: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.weak-icon {
+  margin-right: 10rpx;
+  flex-shrink: 0;
+  font-size: 28rpx;
+}
+.weak-text {
+  flex: 1;
+  font-size: 27rpx;
+  color: #4E5969;
+  line-height: 1.7;
+}
+
+/* 分层教学建议列表 */
+.sug-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.sug-item:last-child {
+  border-bottom: none;
+}
+.sug-item .tag {
+  margin-bottom: 10rpx;
+}

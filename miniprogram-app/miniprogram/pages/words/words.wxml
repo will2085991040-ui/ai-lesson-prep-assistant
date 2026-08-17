@@ -1,0 +1,92 @@
+<!-- pages/words/words.wxml - 单词本 -->
+<view class="page">
+
+  <!-- 顶部搜索 + 添加按钮 -->
+  <view class="search-row">
+    <view class="search-bar">
+      <view class="search-icon">🔍</view>
+      <input class="search-input" placeholder="搜索单词/释义/例句" placeholder-class="form-placeholder" value="{{keyword}}" bindinput="onKeywordInput" />
+    </view>
+    <view class="btn btn-ghost add-btn" hover-class="btn-hover" bindtap="onToggleAdd">{{showAdd ? '收起' : '+ 添加'}}</view>
+  </view>
+
+  <!-- 手动添加表单 -->
+  <view class="card" wx:if="{{showAdd}}">
+    <view class="card-title">手动添加单词</view>
+    <view class="form-item">
+      <view class="form-label required">单词</view>
+      <input class="form-input" placeholder="如：apple" placeholder-class="form-placeholder" value="{{form.word}}" data-field="word" bindinput="onFormInput" />
+    </view>
+    <view class="form-item">
+      <view class="form-label">音标</view>
+      <input class="form-input" placeholder="如：/ˈæpl/" placeholder-class="form-placeholder" value="{{form.phonetic}}" data-field="phonetic" bindinput="onFormInput" />
+    </view>
+    <view class="form-item">
+      <view class="form-label">释义</view>
+      <input class="form-input" placeholder="如：苹果" placeholder-class="form-placeholder" value="{{form.meaning}}" data-field="meaning" bindinput="onFormInput" />
+    </view>
+    <view class="form-item">
+      <view class="form-label">例句</view>
+      <input class="form-input" placeholder="如：I eat an apple every day." placeholder-class="form-placeholder" value="{{form.example}}" data-field="example" bindinput="onFormInput" />
+    </view>
+    <view class="form-item">
+      <view class="form-label">例句翻译</view>
+      <input class="form-input" placeholder="如：我每天吃一个苹果。" placeholder-class="form-placeholder" value="{{form.exampleCn}}" data-field="exampleCn" bindinput="onFormInput" />
+    </view>
+    <view class="btn btn-primary" hover-class="btn-hover" bindtap="onSaveWord">保存到单词本</view>
+  </view>
+
+  <!-- AI 批量生成 -->
+  <view class="card">
+    <view class="card-title">✨ AI 批量生成</view>
+    <view class="form-item">
+      <view class="form-label required">主题</view>
+      <input class="form-input" placeholder="如：校园生活 / 天气 / 动物" placeholder-class="form-placeholder" value="{{aiForm.theme}}" bindinput="onThemeInput" />
+    </view>
+    <view class="form-item form-item-column">
+      <view class="form-label">数量</view>
+      <view class="slider-row">
+        <slider class="slider" min="5" max="20" step="1" value="{{aiForm.count}}" activeColor="#1677FF" block-size="24" bindchange="onCountChange" />
+        <text class="count-num">共 {{aiForm.count}} 个</text>
+      </view>
+    </view>
+    <picker mode="selector" range="{{grades}}" value="{{gradeIndex}}" bindchange="onGradeChange">
+      <view class="form-item">
+        <view class="form-label">年级</view>
+        <view class="form-value {{gradeIndex >= 0 ? '' : 'form-placeholder'}}">{{gradeIndex >= 0 ? grades[gradeIndex] : '不限年级'}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+    <view class="btn btn-primary" hover-class="btn-hover" bindtap="onGenerateWords">✨ AI 生成单词表</view>
+  </view>
+
+  <!-- 单词列表 -->
+  <view class="list">
+    <view class="word-item" wx:for="{{displayList}}" wx:key="word">
+      <view class="word-main">
+        <view class="word-head">
+          <text class="word-text">{{item.word}}</text>
+          <text class="word-phonetic">{{item.phonetic}}</text>
+        </view>
+        <view class="word-meaning">{{item.meaning}}</view>
+        <view wx:if="{{item.example}}" class="word-example">{{item.example}}</view>
+        <view wx:if="{{item.exampleCn}}" class="text-secondary">{{item.exampleCn}}</view>
+      </view>
+      <view class="word-delete" data-idx="{{item.idx}}" catchtap="onDelete">删除</view>
+    </view>
+  </view>
+
+  <!-- 空态：搜索无结果 -->
+  <view class="empty" wx:if="{{!displayList.length && keyword}}">
+    <view class="empty-icon">🔍</view>
+    <text>没有找到相关单词</text>
+  </view>
+
+  <!-- 空态：单词本为空 -->
+  <view class="empty" wx:if="{{!displayList.length && !keyword}}">
+    <view class="empty-icon">📖</view>
+    <text>单词本还是空的，点右上角添加或让 AI 批量生成</text>
+  </view>
+
+  <!-- AI 生成全屏 loading -->
+  <loading-ai show="{{generating}}" text="AI正在生成单词表..." />
+</view>

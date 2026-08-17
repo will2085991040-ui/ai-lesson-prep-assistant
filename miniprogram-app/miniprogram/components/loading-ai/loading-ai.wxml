@@ -1,0 +1,9 @@
+<!-- loading-ai.wxml - 全屏 AI 生成加载动画模板 -->
+<view wx:if="{{show}}" class="mask" catchtouchmove="noop">
+  <view class="card">
+    <!-- 旋转圆环动画 -->
+    <view class="spinner"></view>
+    <view class="text">{{text}}</view>
+    <view class="sub">{{subText}}</view>
+  </view>
+</view>

@@ -1,0 +1,263 @@
+/* pages/detail/detail.wxss - 通用详情页样式 */
+
+/* ==================== 顶部信息卡 ==================== */
+.info-card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  margin: 24rpx;
+  padding: 28rpx 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+}
+.info-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fav-btn {
+  font-size: 24rpx;
+}
+.info-title {
+  margin-top: 16rpx;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1F2329;
+  line-height: 1.4;
+  word-break: break-all;
+}
+.info-meta {
+  margin-top: 10rpx;
+}
+
+/* 卡片标题 */
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1F2329;
+  margin-bottom: 16rpx;
+}
+
+/* ==================== 课件大纲 ==================== */
+.slide-card {
+  padding-bottom: 24rpx;
+}
+.slide-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14rpx;
+}
+.slide-badge {
+  width: 44rpx;
+  height: 44rpx;
+  flex-shrink: 0;
+  margin-right: 16rpx;
+  border-radius: 12rpx;
+  background: linear-gradient(135deg, #1677FF, #3D8EFF);
+  color: #FFFFFF;
+  font-size: 24rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slide-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1F2329;
+  word-break: break-all;
+}
+.slide-content {
+  display: block;
+}
+.slide-tip {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #86909C;
+  line-height: 1.6;
+}
+.notes-toggle {
+  color: #1677FF;
+  font-size: 25rpx;
+  margin-top: 12rpx;
+}
+.notes-box {
+  background: #E8F3FF;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-top: 12rpx;
+}
+
+/* 页内配图 */
+.slide-img {
+  width: 100%;
+  border-radius: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+/* 全屏放映入口 */
+.viewer-row {
+  margin: 0 24rpx 24rpx;
+}
+.viewer-btn {
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+
+/* 课件封面图 */
+.cover-img {
+  width: 100%;
+  border-radius: 12rpx;
+  display: block;
+}
+
+/* ==================== 分层习题 ==================== */
+.ex-tabs {
+  display: flex;
+  background: #F2F3F5;
+  border-radius: 12rpx;
+  padding: 6rpx;
+}
+.ex-tab {
+  flex: 1;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #4E5969;
+  border-radius: 10rpx;
+}
+.ex-tab-active {
+  background: #FFFFFF;
+  color: #1677FF;
+  font-weight: 600;
+}
+.q-card {
+  padding-bottom: 24rpx;
+}
+.q-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14rpx;
+}
+.q-no {
+  font-size: 24rpx;
+  color: #86909C;
+}
+.q-content {
+  display: block;
+  font-weight: 600;
+  color: #1F2329;
+}
+.q-option {
+  margin-top: 14rpx;
+  padding: 18rpx 20rpx;
+  background: #F7F8FA;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #4E5969;
+}
+.q-answer-toggle {
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64rpx;
+  border-radius: 32rpx;
+  background: #E8F3FF;
+  color: #1677FF;
+  font-size: 26rpx;
+}
+.q-answer {
+  margin-top: 14rpx;
+  padding: 16rpx 20rpx;
+  background: #FFF7E8;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #8A5A00;
+  line-height: 1.7;
+}
+
+/* ==================== 学情诊断 ==================== */
+.weak-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.weak-item:last-child {
+  border-bottom: none;
+}
+.weak-icon {
+  margin-right: 10rpx;
+  flex-shrink: 0;
+  font-size: 28rpx;
+}
+.weak-text {
+  flex: 1;
+  font-size: 27rpx;
+  color: #4E5969;
+  line-height: 1.7;
+}
+.sug-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.sug-item:last-child {
+  border-bottom: none;
+}
+.sug-item .tag {
+  margin-bottom: 10rpx;
+}
+
+/* ==================== 底部操作栏（两行） ==================== */
+.detail-bar {
+  flex-direction: column;
+}
+.bar-row {
+  display: flex;
+}
+.poster-btn-full {
+  margin-top: 12rpx;
+}
+
+/* ==================== 分享海报 ==================== */
+/* 画布定位在屏幕外，不能 display:none */
+.poster-canvas {
+  position: fixed;
+  left: 200%;
+  top: 0;
+  width: 320px;
+  height: 512px;
+}
+/* 全屏遮罩 */
+.poster-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.poster-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 640rpx;
+}
+.poster-img {
+  border-radius: 16rpx;
+  display: block;
+}
+.poster-actions {
+  display: flex;
+  width: 600rpx;
+  margin-top: 24rpx;
+}

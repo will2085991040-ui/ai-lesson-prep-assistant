@@ -1,0 +1,92 @@
+<!-- pages/mistakes/mistakes.wxml - 错题本 -->
+<view class="page">
+
+  <!-- 顶部搜索 + 记错题按钮 -->
+  <view class="search-row">
+    <view class="search-bar">
+      <view class="search-icon">🔍</view>
+      <input class="search-input" placeholder="搜索题目/知识点/学科" placeholder-class="form-placeholder" value="{{keyword}}" bindinput="onKeywordInput" />
+    </view>
+    <view class="btn btn-ghost add-btn" hover-class="btn-hover" bindtap="onToggleAdd">{{showAdd ? '收起' : '+ 记错题'}}</view>
+  </view>
+
+  <!-- 记错题表单 -->
+  <view class="card" wx:if="{{showAdd}}">
+    <view class="card-title">记录错题</view>
+    <picker mode="selector" range="{{subjects}}" value="{{subjectIndex}}" bindchange="onSubjectChange">
+      <view class="form-item">
+        <view class="form-label">学科</view>
+        <view class="form-value {{form.subject ? '' : 'form-placeholder'}}">{{form.subject || '请选择学科'}}<view class="form-arrow"></view></view>
+      </view>
+    </picker>
+    <view class="form-item">
+      <view class="form-label">知识点</view>
+      <input class="form-input" placeholder="如：一元二次方程" placeholder-class="form-placeholder" value="{{form.knowledge}}" data-field="knowledge" bindinput="onFormInput" />
+    </view>
+    <view class="form-item form-item-column">
+      <view class="form-label required">题目内容</view>
+      <textarea class="form-textarea" placeholder="粘贴或输入学生做错的题目" placeholder-class="form-placeholder" value="{{form.content}}" data-field="content" bindinput="onFormInput" />
+    </view>
+    <view class="form-item">
+      <view class="form-label">错误原因</view>
+      <input class="form-input" placeholder="可选，如：概念混淆" placeholder-class="form-placeholder" value="{{form.cause}}" data-field="cause" bindinput="onFormInput" />
+    </view>
+    <view class="btn btn-primary" hover-class="btn-hover" bindtap="onSave">保存到错题本</view>
+  </view>
+
+  <!-- 错题列表 -->
+  <view class="list">
+    <view class="mistake-item" wx:for="{{list}}" wx:key="id">
+      <view class="mistake-tags">
+        <text wx:if="{{item.subject}}" class="tag tag-blue">{{item.subject}}</text>
+        <text wx:if="{{item.knowledge}}" class="tag tag-gray mistake-tag">{{item.knowledge}}</text>
+        <text class="mistake-time text-secondary">{{item.time}}</text>
+      </view>
+      <text class="content-text" user-select>{{item.content}}</text>
+      <view wx:if="{{item.cause}}" class="mistake-cause text-secondary">错因：{{item.cause}}</view>
+      <view class="mistake-actions">
+        <view class="action-gen" data-idx="{{item.idx}}" catchtap="onGenVariants">🤖 AI 变式题</view>
+        <view class="action-del" data-idx="{{item.idx}}" catchtap="onDelete">删除</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空态：搜索无结果 -->
+  <view class="empty" wx:if="{{!list.length && keyword}}">
+    <view class="empty-icon">🔍</view>
+    <text>没有找到相关错题</text>
+  </view>
+
+  <!-- 空态：错题本为空 -->
+  <view class="empty" wx:if="{{!list.length && !keyword}}">
+    <view class="empty-icon">✏️</view>
+    <text>还没有记录错题，把学生的共性错题记下来吧</text>
+  </view>
+
+  <!-- 变式题弹层 -->
+  <view class="variant-mask" wx:if="{{variantVisible}}" catchtouchmove="noop">
+    <view class="variant-panel">
+      <view class="variant-title">变式巩固练习</view>
+      <scroll-view class="variant-scroll" scroll-y>
+        <view class="variant-item" wx:for="{{variants}}">
+          <view class="variant-head">
+            <view class="variant-no">{{index + 1}}</view>
+            <text class="content-text variant-content" user-select>{{item.content}}</text>
+          </view>
+          <view class="variant-toggle" data-idx="{{index}}" bindtap="onToggleAnswer">{{item.showAnswer ? '收起' : '查看答案'}}</view>
+          <view wx:if="{{item.showAnswer}}" class="variant-answer">
+            <view class="variant-line">答案：{{item.answer}}</view>
+            <view class="variant-line">解析：{{item.analysis}}</view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="variant-footer">
+        <view class="btn btn-primary bar-btn" hover-class="btn-hover" bindtap="onCopyAll">📋 复制全部</view>
+        <view class="btn btn-plain bar-btn" hover-class="btn-hover" bindtap="onCloseVariants">关闭</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI 生成全屏 loading -->
+  <loading-ai show="{{generating}}" text="AI正在生成变式题..." />
+</view>

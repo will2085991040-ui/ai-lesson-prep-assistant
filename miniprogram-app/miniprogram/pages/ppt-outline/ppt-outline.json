@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "课件大纲",
+  "usingComponents": {
+    "loading-ai": "../../components/loading-ai/loading-ai"
+  }
+}

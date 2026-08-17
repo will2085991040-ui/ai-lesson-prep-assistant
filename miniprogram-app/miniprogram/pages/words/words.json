@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "单词本",
+  "usingComponents": {
+    "loading-ai": "../../components/loading-ai/loading-ai"
+  }
+}

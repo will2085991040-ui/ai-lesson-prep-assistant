@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "详情",
+  "usingComponents": {
+    "collapsible-section": "/components/collapsible-section/collapsible-section",
+    "radar-chart": "/components/radar-chart/radar-chart",
+    "slide-viewer": "/components/slide-viewer/slide-viewer"
+  }
+}

@@ -1,0 +1,188 @@
+/* pages/mistakes/mistakes.wxss - 错题本样式 */
+.page {
+  padding-bottom: 40rpx;
+}
+
+/* ==================== 顶部搜索 + 记错题 ==================== */
+.search-row {
+  display: flex;
+  align-items: center;
+  margin: 24rpx 24rpx 8rpx;
+}
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 24rpx;
+  height: 76rpx;
+  background: #FFFFFF;
+  border-radius: 38rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+}
+.search-icon {
+  margin-right: 12rpx;
+  font-size: 28rpx;
+}
+.search-input {
+  flex: 1;
+  height: 76rpx;
+  font-size: 28rpx;
+}
+.add-btn {
+  flex-shrink: 0;
+  height: 76rpx;
+  margin-left: 16rpx;
+  padding: 0 24rpx;
+  font-size: 26rpx;
+}
+
+/* ==================== 卡片标题 ==================== */
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1F2329;
+  margin-bottom: 8rpx;
+}
+
+/* 题目内容 textarea：label 与 textarea 上下排列 */
+.form-item-column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ==================== 错题列表 ==================== */
+.list {
+  padding-bottom: 20rpx;
+}
+.mistake-item {
+  margin: 0 24rpx 20rpx;
+  padding: 26rpx 24rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+}
+.mistake-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 12rpx;
+}
+.mistake-tag {
+  margin-left: 12rpx;
+}
+.mistake-time {
+  margin-left: auto;
+  font-size: 22rpx;
+}
+.mistake-cause {
+  margin-top: 8rpx;
+}
+.mistake-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #F2F3F5;
+}
+.action-gen {
+  font-size: 26rpx;
+  color: #1677FF;
+}
+.action-del {
+  margin-left: 32rpx;
+  font-size: 26rpx;
+  color: #F53F3F;
+}
+
+/* ==================== 变式题弹层 ==================== */
+.variant-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx 32rpx;
+  background: rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+}
+.variant-panel {
+  width: 100%;
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.variant-title {
+  padding: 28rpx 28rpx 20rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1F2329;
+  text-align: center;
+}
+.variant-scroll {
+  flex: 1;
+  max-height: 52vh;
+  padding: 0 28rpx;
+  box-sizing: border-box;
+}
+.variant-item {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.variant-item:last-child {
+  border-bottom: none;
+}
+.variant-head {
+  display: flex;
+  align-items: flex-start;
+}
+.variant-no {
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1677FF;
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-size: 24rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.variant-content {
+  flex: 1;
+  min-width: 0;
+}
+.variant-toggle {
+  display: inline-block;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #1677FF;
+}
+.variant-answer {
+  margin-top: 12rpx;
+  padding: 20rpx;
+  background: #F0F7FF;
+  border-radius: 12rpx;
+}
+.variant-line {
+  font-size: 25rpx;
+  color: #4E5969;
+  line-height: 1.8;
+  word-break: break-all;
+}
+.variant-footer {
+  display: flex;
+  padding: 20rpx 28rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #FFFFFF;
+  box-shadow: 0 -4rpx 16rpx rgba(31, 45, 61, 0.06);
+}

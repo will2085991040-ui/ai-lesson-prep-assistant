@@ -1,0 +1,66 @@
+/* collapsible-section.wxss - 折叠面板组件样式 */
+.collapsible {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  margin: 0 24rpx 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+}
+
+/* 标题栏 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26rpx 24rpx;
+}
+.header-hover {
+  background: #F7F8FA;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+/* 序号徽标 */
+.number {
+  min-width: 40rpx;
+  height: 40rpx;
+  padding: 0 8rpx;
+  margin-right: 16rpx;
+  background: linear-gradient(135deg, #1677FF, #3D8EFF);
+  color: #FFFFFF;
+  font-size: 22rpx;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.title {
+  font-size: 29rpx;
+  font-weight: 600;
+  color: #1F2329;
+}
+
+/* 展开箭头（CSS 绘制，展开时旋转） */
+.arrow {
+  width: 14rpx;
+  height: 14rpx;
+  border-right: 3rpx solid #86909C;
+  border-bottom: 3rpx solid #86909C;
+  transform: rotate(45deg);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+.arrow-open {
+  transform: rotate(225deg);
+}
+
+/* 内容区 */
+.body {
+  padding: 4rpx 24rpx 28rpx;
+  border-top: 1rpx dashed #E5EAF3;
+}

@@ -1,0 +1,252 @@
+/* app.wxss - 全局公共样式 */
+/* 设计规范：主色 #1677FF / 页面背景 #F5F7FA / 卡片白底圆角 16rpx */
+
+page {
+  background-color: #F5F7FA;
+  color: #1F2329;
+  font-size: 28rpx;
+  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/* ==================== 卡片 ==================== */
+.card {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  margin: 0 24rpx 24rpx;
+  padding: 28rpx 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(31, 45, 61, 0.05);
+}
+
+/* ==================== 表单 ==================== */
+.form-item {
+  display: flex;
+  align-items: center;
+  padding: 26rpx 4rpx;
+  border-bottom: 1rpx solid #F2F3F5;
+}
+.form-item:last-child {
+  border-bottom: none;
+}
+.form-label {
+  width: 168rpx;
+  flex-shrink: 0;
+  font-size: 28rpx;
+  color: #1F2329;
+}
+.required::before {
+  content: '* ';
+  color: #F53F3F;
+}
+.form-input {
+  flex: 1;
+  height: 60rpx;
+  font-size: 28rpx;
+  color: #1F2329;
+}
+.form-value {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 28rpx;
+  color: #1F2329;
+  text-align: right;
+}
+.form-placeholder {
+  color: #C9CDD4;
+}
+.form-arrow {
+  width: 14rpx;
+  height: 14rpx;
+  margin-left: 12rpx;
+  border-top: 3rpx solid #C9CDD4;
+  border-right: 3rpx solid #C9CDD4;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+.form-textarea {
+  width: 100%;
+  height: 168rpx;
+  margin-top: 12rpx;
+  padding: 20rpx;
+  background: #F7F8FA;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+.form-tip {
+  padding: 8rpx 4rpx 0;
+  font-size: 24rpx;
+  color: #86909C;
+}
+
+/* ==================== 按钮 ==================== */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #1677FF 0%, #3D8EFF 100%);
+  color: #FFFFFF;
+  box-shadow: 0 8rpx 20rpx rgba(22, 119, 255, 0.28);
+}
+.btn-ghost {
+  background: #E8F3FF;
+  color: #1677FF;
+}
+.btn-plain {
+  background: #FFFFFF;
+  color: #1677FF;
+  border: 2rpx solid #1677FF;
+}
+.btn-danger {
+  background: #FFF1F0;
+  color: #F53F3F;
+}
+.btn-disabled {
+  opacity: 0.45;
+}
+.btn-hover {
+  opacity: 0.8;
+}
+.bar-btn {
+  flex: 1;
+  margin: 0 10rpx;
+}
+.bar-btn:first-child {
+  margin-left: 0;
+}
+.bar-btn:last-child {
+  margin-right: 0;
+}
+
+/* ==================== 标签 ==================== */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+.tag-blue {
+  background: #E8F3FF;
+  color: #1677FF;
+}
+.tag-green {
+  background: #E8FFEA;
+  color: #00B42A;
+}
+.tag-orange {
+  background: #FFF3E8;
+  color: #FF7D00;
+}
+.tag-gray {
+  background: #F2F3F5;
+  color: #86909C;
+}
+.tag-red {
+  background: #FFECE8;
+  color: #F53F3F;
+}
+
+/* ==================== 区块标题 ==================== */
+.section-title {
+  display: flex;
+  align-items: center;
+  margin: 36rpx 24rpx 20rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1F2329;
+}
+.section-title::before {
+  content: '';
+  width: 8rpx;
+  height: 30rpx;
+  margin-right: 14rpx;
+  background: #1677FF;
+  border-radius: 4rpx;
+}
+
+/* ==================== 底部固定操作栏 ==================== */
+.fixed-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  background: #FFFFFF;
+  box-shadow: 0 -4rpx 16rpx rgba(31, 45, 61, 0.06);
+}
+/* 页面内容为底部固定栏留出空间 */
+.has-fixed-bar {
+  padding-bottom: 200rpx;
+}
+
+/* ==================== 空状态 ==================== */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 140rpx 0 100rpx;
+  color: #86909C;
+  font-size: 26rpx;
+}
+.empty-icon {
+  font-size: 88rpx;
+  margin-bottom: 20rpx;
+}
+
+/* ==================== 文本工具 ==================== */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ellipsis-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.content-text {
+  font-size: 27rpx;
+  color: #4E5969;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.text-secondary {
+  font-size: 24rpx;
+  color: #86909C;
+}
+
+/* ==================== 选择标签（chip） ==================== */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 28rpx;
+  margin: 0 16rpx 16rpx 0;
+  border-radius: 32rpx;
+  background: #F2F3F5;
+  color: #4E5969;
+  font-size: 26rpx;
+  border: 2rpx solid transparent;
+  box-sizing: border-box;
+}
+.chip-active {
+  background: #E8F3FF;
+  color: #1677FF;
+  border-color: #1677FF;
+}
