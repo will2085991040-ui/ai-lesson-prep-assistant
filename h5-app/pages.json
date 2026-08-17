@@ -1,0 +1,52 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "AI备课助手"
+      }
+    },
+    {
+      "path": "pages/lesson-plan/lesson-plan",
+      "style": {
+        "navigationBarTitleText": "智能备课"
+      }
+    },
+    {
+      "path": "pages/courseware/courseware",
+      "style": {
+        "navigationBarTitleText": "AI课件"
+      }
+    },
+    {
+      "path": "pages/exercises/exercises",
+      "style": {
+        "navigationBarTitleText": "分层习题"
+      }
+    },
+    {
+      "path": "pages/analysis/analysis",
+      "style": {
+        "navigationBarTitleText": "学情诊断"
+      }
+    },
+    {
+      "path": "pages/recharge/recharge",
+      "style": {
+        "navigationBarTitleText": "充值中心"
+      }
+    },
+    {
+      "path": "pages/profile/profile",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "AI备课助手",
+    "navigationBarBackgroundColor": "#1677FF",
+    "backgroundColor": "#F5F7FA"
+  }
+}
