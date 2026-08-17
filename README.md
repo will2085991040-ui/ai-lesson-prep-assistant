@@ -97,4 +97,4 @@ MIT
  💖 支持与赞助
 如果项目对你有帮助，可以请作者喝杯咖啡~
  微信赞赏
-![https://seclink.bytedance.com/?app_version=null&channel=null&seclink_version=1.1.0&scene=im&target=https%3A%2F%2Fimgchr.com%2F%3Fuse_xbridge3%3Dtrue%26loader_name%3Dforest%26need_sec_link%3D1%26sec_link_scene%3Dim%26theme%3Dlight&sec_link_biz_tag=argus&seclink_settings_version=B350AFCAB4F3218AF5D74ADC624143E2&jumper_version=1&device_platform=android&os_name=android&lang=cn&app_id=482431&aid=482431&did=null]
+![url=https://imgchr.com/i/pmjKgTP][img]https://s41.ax1x.com/2026/08/17/pmjKgTP.png[/img][/url]
